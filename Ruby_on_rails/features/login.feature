@@ -1,10 +1,10 @@
 Feature: Login
-  As a user
+  As an user
   I want to log into the system
   So that I can access my account
 
     Background:
-        Given There is a user with email "email@testes.com" and password "password123"
+        Given There is an user with email "email@testes.com" and password "password123"
 
     Scenario: Login as PARTICIPANTE
         When I visit the login page
