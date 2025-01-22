@@ -7,7 +7,7 @@ Feature: HomePage Participante
     Background:
         Given I am a PARTICIPANTE
 
-    Scenario: HomePage as PARTICIPANTE
+    Scenario: Managing my profile account as PARTICIPANTE
         When I visit the homepage as a PARTICIPANTE
         Then I want to be able to enter my profile page by clicking in my perfil avatar
         Then I want to be redirected to user_update page
