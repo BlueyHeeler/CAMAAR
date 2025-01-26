@@ -1,0 +1,35 @@
+<h1>Registrar-se</h1>
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<% if @user.errors.any? %>
+  <div class="error-messages">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @user, url: users_path, local: true) do |f| %>
+  <div>
+    <%= f.label :name, "Nome" %>
+    <%= f.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :email, "Email" %>
+    <%= f.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :password, "Senha" %>
+    <%= f.password_field :password, required: true %>
+  </div>
+
+  <%= f.submit "Registrar", class: "btn btn-success" %>
+<% end %>
