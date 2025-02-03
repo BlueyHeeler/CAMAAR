@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Questionarios" %>
+
+<h1>Questionarios</h1>
+
+<div id="questionarios">
+  <% @questionarios.each do |questionario| %>
+    <%= render questionario %>
+    <p>
+      <%= link_to "Show this questionario", questionario %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New questionario", new_questionario_path %>

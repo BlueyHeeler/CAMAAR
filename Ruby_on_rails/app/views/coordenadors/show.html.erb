@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @coordenador %>
+
+<div>
+  <%= link_to "Edit this coordenador", edit_coordenador_path(@coordenador) %> |
+  <%= link_to "Back to coordenadors", coordenadors_path %>
+
+  <%= button_to "Destroy this coordenador", @coordenador, method: :delete %>
+</div>

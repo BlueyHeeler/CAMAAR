@@ -1,0 +1,32 @@
+<%= form_with(model: respostum) do |form| %>
+  <% if respostum.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(respostum.errors.count, "error") %> prohibited this respostum from being saved:</h2>
+
+      <ul>
+        <% respostum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :valor, style: "display: block" %>
+    <%= form.text_field :valor %>
+  </div>
+
+  <div>
+    <%= form.label :questao_id, style: "display: block" %>
+    <%= form.text_field :questao_id %>
+  </div>
+
+  <div>
+    <%= form.label :questionario_id, style: "display: block" %>
+    <%= form.text_field :questionario_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
