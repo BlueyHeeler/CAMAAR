@@ -56,14 +56,12 @@ group :development do
   gem "web-console"
 end
 
-group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-end
-
-group :test do
+group :development, :test do
+  # ...existing code...
+  gem 'rspec-rails', '~> 6.1.0'
+  gem 'capybara'
   gem 'cucumber-rails', require: false
-  # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  
 end
