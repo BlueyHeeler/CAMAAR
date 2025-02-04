@@ -1,6 +1,6 @@
 :root {
     --input-focus: #2d8cf0;
-    --font-color: #323232;
+    --font-color: #010002;
     --font-color-sub: #666;
     --bg-color: beige;
     --main-color: black;
@@ -10,7 +10,7 @@
     width: 180px;
     margin: 0;
     padding: 8px;
-    background: lightblue;
+    background: #5bb7b6;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -36,7 +36,7 @@
   }
   
   .user-profile-card p {
-    color: var(--font-color-sub);
+    color: var(--main-color);
     margin: 5px 0;
     font-size: 14px;
   }

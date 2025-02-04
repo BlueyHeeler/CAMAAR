@@ -24,7 +24,7 @@
   </head>
 
   <body>
-  <% unless controller_name == 'home' && (action_name == 'login' ) %>
+    <% unless controller_name == 'home' && (action_name == 'login' || action_name == 'authenticate' ) %>
       <%= render 'layouts/header' %>
     <% end %>
     <%= yield %>

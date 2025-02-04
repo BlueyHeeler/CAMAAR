@@ -5,12 +5,24 @@
     --bg-color: beige;
     --main-color: black;
   }
+
+  body {
+    background-color: #feffd6;
+    margin: 0;
+    min-height: 100vh;
+  }
+  
+  .form-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 20px;
+  }
   
   header {
     max-width: 20000px;
     margin: 1rem auto;
     padding: 20px;
-    background: lightblue;
+    background: #5bb7b6;
     border-radius: 5px;
     border: 2px solid var(--main-color);
     box-shadow: 4px 4px var(--main-color);
@@ -57,4 +69,29 @@
     transform: translate(3px, 3px);
   }
 
-  
+    /* Container class can stay or be omitted */
+  .container {
+    margin: 0 0 0 0px; /* Changed margin to move container left */
+    max-width: 200px; /* adjust as needed */
+  }
+
+  /* Row for a basic flex layout */
+  .custom-row {
+    display: flex;
+    gap: 20px;
+  }
+
+  /* Each column takes half the width */
+  .custom-col {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Optional styling for alert box */
+  .alert {
+    border: 1px solid red;
+    padding: 10px;
+    color: red;
+    margin-top: 20px;
+  }

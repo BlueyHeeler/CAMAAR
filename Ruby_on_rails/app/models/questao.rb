@@ -13,9 +13,8 @@ class Questao < ApplicationRecord
 
   def create_options(comentario)
     raise ArgumentError, "Comentario cannot be nil" if comentario.nil?
-
-    5.times do |i|
-      QuestaoOption.create(nome: "#{i +1}.", texto: comentario)
+    
+    QuestaoOption.create(nome: "#{i}.", texto: comentario)
     end
   end
 end

@@ -1,8 +1,27 @@
-<div class="container mt-5">
+<div class="container">
   <% if current_user %>
-    <%= render 'layouts/card_box', user: current_user %>
+    <div class="custom-row">
+      <div class="custom-col">
+        <%= render 'layouts/profile_box', user: current_user %>
+      </div>
+      <div class="custom-col">
+        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
+        <br>
+        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
+      </div>
+      <div class="custom-col">
+        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
+        <br>
+        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
+      </div>
+      <div class="custom-col">
+        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
+        <br>
+        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
+      </div>
+    </div>
   <% else %>
-    <div class="alert alert-warning">
+    <div class="alert">
       Please log in to view your profile.
     </div>
   <% end %>

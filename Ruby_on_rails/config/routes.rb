@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post "login", to: "home#authenticate"
   delete "logout", to: "home#logout"
 
+  get 'home/gerenciamento'
+
   get 'home/homepage'
   get "up" => "rails/health#show", as: :rails_health_check
 end

@@ -29,4 +29,5 @@ class User < ApplicationRecord
      def update_timestamp
          self.updated_at = Time.current
      end
+     
 end

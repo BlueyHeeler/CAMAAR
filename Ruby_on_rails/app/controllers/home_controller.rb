@@ -6,6 +6,9 @@ class HomeController < ApplicationController
   def homepage
   end
 
+  def gerenciamento
+  end
+
   def authenticate
     user = User.find_by(matricula: params[:matricula])
     puts "User found: #{user.inspect}" # Debug statement

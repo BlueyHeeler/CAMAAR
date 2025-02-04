@@ -1,0 +1,19 @@
+<div class="card user-profile-card">
+    <div class="card-header" style="text-align: center;">
+        <h3>Profile</h3>
+        <div class="avatar-container">
+            <% if user.avatar.attached? %>
+                <%= image_tag user.avatar, class: "profile-avatar" %>
+            <% else %>
+                <%= image_tag "default_avatar.png", class: "profile-avatar" %>
+            <% end %>
+        </div>
+    </div>
+    
+    <div class="card-body">
+        <p><strong>Name:</strong> <%= user.nome %></p>
+        <p><strong>Registration:</strong> <%= user.matricula %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>Role:</strong> <%= user.role.capitalize %></p>
+    </div>
+</div>
