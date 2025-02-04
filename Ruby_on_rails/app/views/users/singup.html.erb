@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <!-- Aqui você pode incluir seus arquivos de CSS para aplicar os estilos (classes "form", "input", "button-confirm", etc.) -->
+  </head>
+  <body>
+    <div class="form-container">
+      <% if flash[:alert] %>
+        <p style="color: red;"><%= flash[:alert] %></p>
+      <% end %>
+
+      <%= form_with(model: @user, url: signup_path, class: "form") do |form| %>
+        <!-- Cabeçalho com título -->
+        <div class="title">
+          Sign Up<br>
+          <span>crie sua conta</span>
+        </div>
+
+        <!-- Campo de matricula -->
+        <%= form.text_field :matricula, placeholder: "matricula", class: "input", required: true %>
+
+        <!-- Campo de senha -->
+        <%= form.password_field :password, placeholder: "Password", class: "input", required: true %>
+
+        <!-- Seção para escolher o tipo de usuário -->
+        <div class="user-type" style="margin-top: 1rem;">
+          <%= form.label :role, "Tipo de Usuário" %>
+          <div>
+            <%= form.radio_button :role, 'student', checked: true %>
+            <%= form.label :role_student, 'Estudante' %>
+            <br>
+            <%= form.radio_button :role, 'admin' %>
+            <%= form.label :role_admin, 'Admin' %>
+          </div>
+        </div>
+
+        <!-- Botão de submit -->
+        <button type="submit" class="button-confirm">Sign Up →</button>
+      <% end %>
+    </div>
+  </body>
+</html>
+

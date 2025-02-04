@@ -15,9 +15,12 @@
         <!-- Cabeçalho com título -->
         <div class="title">
           Welcome,<br>
-          <span>sign in to continue</span>
+          <!-- Botão de signup -->
+          <div style="margin-top: 1rem;">
+            <%= link_to 'sing up to continue', singup_path, method: :post, class: "button-confirm" %>
+          </div>
         </div>
-
+ 
         <!-- Campo de matricula -->
         <%= form.text_field :matricula, placeholder: "matricula", class: "input", required: true %>
 
@@ -36,8 +39,8 @@
           </div>
         </div>
 
-        <!-- Botão de submit -->
-        <button type="submit" class="button-confirm">Entrar →</button>
+        <!-- Botão de submit e subscribe-->
+        <button type="submit" class="button-confirm">Let`s go →</button>
       <% end %>
     </div>
   </body>
