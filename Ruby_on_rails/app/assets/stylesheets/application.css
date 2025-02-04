@@ -1,24 +1,60 @@
-header {
-    background-color: #2d8cf0;
-    color: #323232;
-    padding: 10px 0;
-}
-
-nav ul {
+:root {
+    --input-focus: #2d8cf0;
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: beige;
+    --main-color: black;
+  }
+  
+  header {
+    max-width: 20000px;
+    margin: 1rem auto;
+    padding: 20px;
+    background: lightblue;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav ul {
     list-style-type: none;
     padding: 0;
-}
-
-nav ul li {
+    margin: 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav ul li {
     display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: white;
+  }
+  
+  nav ul li a {
+    color: var(--font-color);
     text-decoration: none;
-}
+    font-weight: 600;
+    font-size: 17px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    border: 2px solid var(--main-color);
+    background-color: var(--bg-color);
+    box-shadow: 4px 4px var(--main-color);
+    text-decoration: none;
+  }
+  
+  nav ul li a:active {
+    box-shadow: 0px 0px var(--main-color);
+    transform: translate(3px, 3px);
+  }
 
-nav ul li a:hover {
-    text-decoration: underline;
-}
+  

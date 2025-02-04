@@ -1,1 +1,9 @@
-<%= current_user.nome if current_user %>
+<div class="container mt-5">
+  <% if current_user %>
+    <%= render 'layouts/card_box', user: current_user %>
+  <% else %>
+    <div class="alert alert-warning">
+      Please log in to view your profile.
+    </div>
+  <% end %>
+</div>

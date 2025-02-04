@@ -1,0 +1,42 @@
+:root {
+    --input-focus: #2d8cf0;
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: beige;
+    --main-color: black;
+  }
+  
+  .user-profile-card {
+    width: 180px;
+    margin: 0;
+    padding: 8px;
+    background: lightblue;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
+  }
+  
+  .user-profile-card .card-header {
+    border-bottom: 2px solid var(--main-color);
+    padding: 8px;
+  }
+  
+  .user-profile-card .card-header h3 {
+    color: var(--font-color);
+    font-weight: 900;
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .user-profile-card .card-body {
+    padding: 5px;
+  }
+  
+  .user-profile-card p {
+    color: var(--font-color-sub);
+    margin: 5px 0;
+    font-size: 14px;
+  }
