@@ -40,3 +40,18 @@
     margin: 5px 0;
     font-size: 14px;
   }
+
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+  }
+  
+  .profile-avatar {
+    width: 120px;
+    height: 180px;
+    border-radius: 5px;
+    object-fit: cover;
+    border: 2px solid var(--main-color);
+    box-shadow: 2px 2px var(--main-color);
+  }

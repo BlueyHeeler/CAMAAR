@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
+    has_one_attached :avatar
     validates :role, inclusion: { in: ['admin', 'student'] }
 
      # Add timestamps
