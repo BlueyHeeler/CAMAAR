@@ -60,11 +60,11 @@ class TurmasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_turma
-      @turma = Turma.find(params.expect(:id))
+      @turma = Turma.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def turma_params
-      params.expect(turma: [ :codigo, :semestre, :materia_id ])
+      params.expect(turma: [ :codigo, :semestre, :materium_id ])
     end
 end

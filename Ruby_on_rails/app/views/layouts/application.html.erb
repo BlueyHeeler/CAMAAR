@@ -24,6 +24,9 @@
   </head>
 
   <body>
+  <% unless controller_name == 'home' && (action_name == 'login' ) %>
+      <%= render 'layouts/header' %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

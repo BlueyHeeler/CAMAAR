@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>Login</title>
-    <!-- Aqui você pode incluir seus arquivos de CSS para aplicar os estilos (classes "form", "input", "button-confirm", etc.) -->
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <div class="form-container">
@@ -10,11 +11,11 @@
         <p style="color: red;"><%= flash[:alert] %></p>
       <% end %>
 
-      <%= form_with url: login_path, method: :post, html: { class: "form" } do |form| %>
+      <%= form_with url: login_path, method: :post, local: true, html: { class: "form" } do |form| %>
         <!-- Cabeçalho com título -->
         <div class="title">
           Welcome,<br>
-          <span>sign up to continue</span>
+          <span>sign in to continue</span>
         </div>
 
         <!-- Campo de matricula -->
@@ -27,15 +28,16 @@
         <div class="user-type" style="margin-top: 1rem;">
           <%= form.label :user_role, "Tipo de Usuário" %>
           <div>
-            <%= form.radio_button :user_role, 'student', checked: true %>
-            <%= form.label :user_type_regular, 'student' %>
+            <%= form.radio_button :user_role, 'student', id: 'user_role_student', checked: true %>
+            <%= form.label :user_role_student, 'student' %>
             <br>
-            <%= form.radio_button :user_role, 'admin' %>
-            <%= form.label :user_type_admin, 'admin' %>
+            <%= form.radio_button :user_role, 'admin', id: 'user_role_admin' %>
+            <%= form.label :user_role_admin, 'admin' %>
+          </div>
         </div>
 
         <!-- Botão de submit -->
-        <button type="submit" class="button-confirm">Let`s go →</button>
+        <button type="submit" class="button-confirm">Entrar →</button>
       <% end %>
     </div>
   </body>

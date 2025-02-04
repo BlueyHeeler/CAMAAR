@@ -1,3 +1,3 @@
 class Turma < ApplicationRecord
-  belongs_to :materia
+  belongs_to :materium
 end

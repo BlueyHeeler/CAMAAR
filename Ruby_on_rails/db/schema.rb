@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_03_153554) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_04_024823) do
   create_table "coordenadors", force: :cascade do |t|
     t.integer "departamento_id", null: false
     t.integer "user_id", null: false
@@ -103,10 +103,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_03_153554) do
   create_table "turmas", force: :cascade do |t|
     t.string "codigo"
     t.string "semestre"
-    t.integer "materia_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["materia_id"], name: "index_turmas_on_materia_id"
+    t.integer "materium_id", null: false
+    t.index ["materium_id"], name: "index_turmas_on_materium_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -132,5 +132,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_03_153554) do
   add_foreign_key "respondidos", "users"
   add_foreign_key "resposta", "questaos"
   add_foreign_key "resposta", "questionarios"
-  add_foreign_key "turmas", "materia", column: "materia_id"
+  add_foreign_key "turmas", "materia"
 end

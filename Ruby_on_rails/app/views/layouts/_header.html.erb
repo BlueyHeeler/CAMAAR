@@ -1,0 +1,11 @@
+<header>
+  <nav>
+    <ul>
+      <li><%= link_to "Avaliações",  home_homepage_path%></li>
+      <% if current_user&.admin? %>
+        <li><%= link_to "Gerenciamento",  root_path%></li>
+      <% end %>
+      <li><%= link_to "Logout", root_path %></li>
+    </ul>
+  </nav>
+</header>
