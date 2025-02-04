@@ -1,28 +1,29 @@
 <div class="container">
   <% if current_user %>
     <div class="custom-row">
+      <% if current_user.student? %>
+        <div class="custom-col">
+          <%= render 'layouts/profile_box', user: current_user %>
+        </div>
+        <% current_user.registro_matricula.turma.questionarios.each do |questionario| %>
+          <%= render 'layouts/card_box', 
+          title: questionario.nome, 
+          content: questionario.template.semestre, 
+          professor: questionario.template.publico_alvo %>
+          <br>
+        <% end %>
+      <% else %>
       <div class="custom-col">
         <%= render 'layouts/profile_box', user: current_user %>
       </div>
-      <div class="custom-col">
-        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
+      <% current_user.questionarios.each do |questionario| %>
+        <%= render 'layouts/card_box', 
+        title: questionario.nome, 
+        content: questionario.template.semestre, 
+        professor: questionario.template.publico_alvo %>
         <br>
-        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
-      </div>
-      <div class="custom-col">
-        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
-        <br>
-        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
-      </div>
-      <div class="custom-col">
-        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
-        <br>
-        <%= render 'layouts/card_box', title: "Title", content: "Teste", date: "April 15, 2022" %>
-      </div>
-    </div>
-  <% else %>
-    <div class="alert">
-      Please log in to view your profile.
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 </div>

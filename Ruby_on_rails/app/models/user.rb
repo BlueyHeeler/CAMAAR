@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    has_one :registro_matricula, class_name: 'Matricula', foreign_key: 'user_id'
+    has_many :questionarios
     has_secure_password
     has_one_attached :avatar
     validates :role, inclusion: { in: ['admin', 'student'] }
