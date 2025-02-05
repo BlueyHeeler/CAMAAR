@@ -5,12 +5,14 @@
         <div class="custom-col">
           <%= render 'layouts/profile_box', user: current_user %>
         </div>
-        <% current_user.registro_matricula.turma.questionarios.each do |questionario| %>
-          <%= render 'layouts/card_box', 
-          title: questionario.nome, 
-          content: questionario.template.semestre, 
-          professor: questionario.template.publico_alvo %>
-          <br>
+        <% if current_user.registro_matricula %> 
+          <% current_user.registro_matricula.turma.questionarios.each do |questionario| %>
+            <%= render 'layouts/card_box', 
+            title: questionario.nome, 
+            content: questionario.template.semestre, 
+            professor: questionario.template.publico_alvo %>
+            <br>
+        <% end %>
         <% end %>
       <% else %>
       <div class="custom-col">

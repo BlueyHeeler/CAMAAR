@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   root 'home#login'
   get 'home/login'
   get "login", to: "home#login"
-  get 'singup', to: 'users#new'     # Mostra formulário
+  get 'singup', to: 'users#new', as: 'users_singup'
   post "login", to: "home#authenticate"
   post 'signup', to: 'users#create'
   delete "logout", to: "home#logout"
