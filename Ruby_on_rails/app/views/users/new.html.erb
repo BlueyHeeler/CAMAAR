@@ -52,8 +52,10 @@
         </div>
 
         <!-- Botões de submit e back -->
-        <button type="submit" class="button-confirm">Sign Up →</button>
-        <button type="button" class="button-confirm" onclick="window.history.back();">Back ←</button>
+        <div class="button-double">
+          <a href="#" class="button-confirm" onclick="event.preventDefault(); this.closest('form').submit();">Sign Up →</a>
+          <a href="#" class="button-confirm" onclick="window.history.back();">Back ←</a>
+        </div>
       <% end %>
     </div>
   </body>

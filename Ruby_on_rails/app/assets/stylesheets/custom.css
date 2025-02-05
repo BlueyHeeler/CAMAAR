@@ -119,4 +119,15 @@
     color: var(--font-color);
     font-weight: 600;
   }
+
+  .button-double {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
   
+  .button-double a {
+    width: 48%;
+    text-align: center;
+  }
+
