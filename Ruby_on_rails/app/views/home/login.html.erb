@@ -11,13 +11,17 @@
         <p style="color: red;"><%= flash[:alert] %></p>
       <% end %>
 
+      <% if notice %>
+        <p style="color: green;"><%= notice %></p>
+      <% end %>
+
       <%= form_with url: login_path, method: :post, local: true, html: { class: "form" } do |form| %>
         <!-- Cabeçalho com título -->
         <div class="title">
           Welcome,<br>
           <!-- Botão de signup -->
           <div style="margin-top: 1rem;">
-            <%= link_to 'sing up to continue', users_singup_path, method: :post, class: "button-confirm" %>
+            <%= link_to 'sign up to continue', signup_path, method: :post, class: "button-confirm" %>
           </div>
         </div>
  

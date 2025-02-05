@@ -1,11 +1,60 @@
-<% content_for :title, "New user" %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <!-- Aqui você pode incluir seus arquivos de CSS para aplicar os estilos (classes "form", "input", "button-confirm", etc.) -->
+  </head>
+  <body>
+    <div class="form-container">
+      <% if flash[:alert] %>
+        <p style="color: red;"><%= flash[:alert] %></p>
+      <% end %>
 
-<h1>New user</h1>
+      <%= form_with(model: @user, url: signup_path, class: "form") do |form| %>
+        <!-- Cabeçalho com título -->
+        <div class="title">
+          Sign Up<br>
+        </div>
+        <!-- Exibir mensagens de erro -->
+        <% if @user.errors.any? %>
+          <div class="error-messages">
+            <h2><%= pluralize(@user.errors.count, "erro") %> proibiu este usuário de ser salvo:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-<%= render "form", user: @user %>
+        <!-- Campo de matricula -->
+        <%= form.text_field :matricula, placeholder: "matricula", class: "input", required: true %>
 
-<br>
+        <!-- Campo de nome -->
+        <%= form.text_field :nome, placeholder: "Nome", class: "input" %>
 
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
+        <!-- Campo de email -->
+        <%= form.email_field :email, placeholder: "Email", class: "input", required: true %>
+
+        <!-- Campo de senha -->
+        <%= form.password_field :password, placeholder: "Password", class: "input", required: true %>
+
+        <!-- Seção para escolher o tipo de usuário -->
+        <div class="user-type" style="margin-top: 1rem;">
+          <%= form.label :role, "Tipo de Usuário" %>
+          <div>
+            <%= form.radio_button :role, 'student', id: 'role_student', checked: true %>
+            <%= form.label :role_student, 'student' %>
+            <br>
+            <%= form.radio_button :role, 'admin', id: 'role_admin' %>
+            <%= form.label :role_admin, 'admin' %>
+          </div>
+        </div>
+
+        <!-- Botão de submit -->
+        <button type="submit" class="button-confirm">Sign Up →</button>
+      <% end %>
+    </div>
+  </body>
+</html>
+

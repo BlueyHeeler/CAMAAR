@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_many :questionarios
     has_secure_password
     has_one_attached :avatar
+    validates :password, presence: true
     validates :role, inclusion: { in: ['admin', 'student'] }
 
      # Add timestamps
