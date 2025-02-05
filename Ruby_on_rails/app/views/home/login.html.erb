@@ -19,10 +19,6 @@
         <!-- Cabeçalho com título -->
         <div class="title">
           Welcome,<br>
-          <!-- Botão de signup -->
-          <div style="margin-top: 1rem;">
-            <%= link_to 'sign up to continue', signup_path, method: :post, class: "button-confirm" %>
-          </div>
         </div>
  
         <!-- Campo de matricula -->
@@ -45,6 +41,7 @@
 
         <!-- Botão de submit e subscribe-->
         <button type="submit" class="button-confirm">Let`s go →</button>
+        <button type="button" class="button-confirm" onclick="window.location.href='/signup';">Sign Up</button>
       <% end %>
     </div>
   </body>
