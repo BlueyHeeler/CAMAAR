@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('jsonFileInput');
     const file = fileInput.files[0];
     const departmentName = document.getElementById('departmentNameInput').value;
+    const importType = document.getElementById('importType').value;
+    
     if (!file) {
       alert('Please select a file');
       return;
@@ -38,10 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.onload = (event) => {
       try {
         const parsedData = JSON.parse(event.target.result);
+        const form = document.getElementById('importForm');
+        form.action = importType === 'classes' ? 
+          '/home/import_data_classes' : 
+          '/home/import_data_members';
+        
         document.getElementById('importedData').value = JSON.stringify(parsedData);
         document.getElementById('departmentName').value = departmentName;
-        console.log('Submitting form with data:', parsedData);
-        document.getElementById('importForm').submit();
+        form.submit();
       } catch (error) {
         alert('Invalid JSON format');
         console.error('JSON parsing error:', error);

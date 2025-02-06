@@ -16,10 +16,14 @@
   <div class="popup-content">
     <span class="close" onclick="closePopup()">&times;</span>
     <h2>Importar Dados</h2>
+    <select id="importType">
+      <option value="classes">Classes</option>
+      <option value="members">Members</option>
+    </select>
     <input type="file" id="jsonFileInput" accept=".json">
     <input type="text" id="departmentNameInput" placeholder="Nome do Departamento">
     <button type="button" class="button-confirm" onclick="importData()">Importar</button>
-    <form id="importForm" action="<%= home_import_data_materia_path %>" method="post" style="display: none;">
+    <form id="importForm" action="<%= home_import_data_classes_path %>" method="post" style="display: none;">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <input type="hidden" name="imported_data" id="importedData">
       <input type="hidden" name="department_name" id="departmentName">

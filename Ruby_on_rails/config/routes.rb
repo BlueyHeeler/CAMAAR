@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   delete "logout", to: "home#logout"
   
   post 'home/import_data_materia', to: 'home#import_data_materia'
+  post 'home/import_data_classes'
+  post 'home/import_data_members'
 
   get 'home/gerenciamento_templates'
   get 'home/homepage'

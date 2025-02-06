@@ -3,7 +3,8 @@ class CreateTurmas < ActiveRecord::Migration[8.0]
     create_table :turmas do |t|
       t.string :codigo
       t.string :semestre
-      t.references :materia, null: false, foreign_key: true
+      t.string :horario
+      t.references :materium, null: false, foreign_key: true  # Changed from materia to materium
 
       t.timestamps
     end
