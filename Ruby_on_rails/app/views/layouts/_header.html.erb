@@ -1,11 +1,28 @@
 <header>
   <nav>
     <ul>
-      <li><%= link_to "Avaliações",  home_homepage_path%></li>
       <% if current_user&.admin? %>
-        <li><%= link_to "Gerenciamento",  home_gerenciamento_path%></li>
+        <li><a href="#" id="open-popup">Importar dados</a></li>
+        <li><%= link_to "Editar templates", home_gerenciamento_templates_path %></li>
+        <li><%= link_to "Enviar Formulários", home_gerenciamento_templates_path %></li>
+        <li><%= link_to "Resultados", home_homepage_path %></li>
       <% end %>
       <li><%= link_to "Logout", root_path %></li>
     </ul>
   </nav>
 </header>
+
+<div id="importPopup" class="popup" style="display: none;">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <h2>Importar Dados</h2>
+    <input type="file" id="jsonFileInput" accept=".json">
+    <input type="text" id="departmentNameInput" placeholder="Nome do Departamento">
+    <button type="button" class="button-confirm" onclick="importData()">Importar</button>
+    <form id="importForm" action="<%= home_import_data_materia_path %>" method="post" style="display: none;">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="imported_data" id="importedData">
+      <input type="hidden" name="department_name" id="departmentName">
+    </form>
+  </div>
+</div>

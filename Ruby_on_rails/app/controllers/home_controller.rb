@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   def homepage
   end
 
-  def gerenciamento
+  def gerenciamento_templates
   end
 
   def authenticate
@@ -38,6 +38,31 @@ class HomeController < ApplicationController
       puts "Password authentication failed" # Debug statement
       flash.now[:alert] = "Invalid password"
       render :login, status: :unprocessable_entity
+    end
+  end
+
+  def import_data_materia
+    begin
+      imported_data = JSON.parse(params[:imported_data])
+      department_name = params[:department_name]
+      department = Departamento.find_or_create_by!(nome: department_name)
+      puts "Department: #{department.inspect}" # Debug statement
+      puts "Imported data: #{imported_data.inspect}" # Debug statement
+      imported_data.each do |data|
+        materia = Materia.find_or_create_by!(codigo: data["code"], nome: data["name"], departamento: department)
+        puts "Materia: #{materia.inspect}" # Debug statement
+        turma = Turma.find_or_create_by!(
+          codigo: data["class"]["classCode"],
+          semestre: data["class"]["semester"],
+          horario: data["class"]["time"],
+          materium_id: materia.id
+        )
+        puts "Turma: #{turma.inspect}" # Debug statement
+      end
+      redirect_to home_homepage_path, notice: "Data imported successfully"
+    rescue => e
+      puts "Error importing data: #{e.message}" # Debug statement
+      redirect_to home_homepage_path, alert: "Failed to import data"
     end
   end
 end
