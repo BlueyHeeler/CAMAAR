@@ -1,4 +1,4 @@
-<%= form_with(model: questao) do |form| %>
+<%= form_with(model: [@template, questao], local: true) do |form| %>
   <% if questao.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(questao.errors.count, "error") %> prohibited this questao from being saved:</h2>
@@ -11,27 +11,23 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
+  <div id="questions-container">
+    <div class="question-fields">
+      <div>
+        <%= form.label :enunciado, "Question Text", style: "display: block" %>
+        <%= form.text_area :enunciado, name: "questaos[0][enunciado]" %>
+      </div>
+
+      <div>
+        <%= form.label :texto, "Answer", style: "display: block" %>
+        <%= form.text_area :texto, name: "questaos[0][texto]" %>
+      </div>
+
+      <button type="button" class="delete-question btn btn-danger" style="display: none;">Delete Question</button>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :texto, style: "display: block" %>
-    <%= form.textarea :texto %>
-  </div>
-
-  <div>
-    <%= form.label :tipo, style: "display: block" %>
-    <%= form.text_field :tipo %>
-  </div>
-
-  <div>
-    <%= form.label :template_id, style: "display: block" %>
-    <%= form.text_field :template_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="actions mt-3">
+    <%= form.submit "Save All Questions", class: "btn btn-primary" %>
   </div>
 <% end %>

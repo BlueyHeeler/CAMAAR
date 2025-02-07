@@ -1,13 +1,7 @@
 class Questao < ApplicationRecord
   belongs_to :template
-  has_many :questao_options
-  has_many :respostas
-  validates :tipo, inclusion: { in: ['multipla_escolha', 'dissertativa', 'certo_ou_errado'] }
+  has_many :questao_options, dependent: :destroy
+  has_many :respostas, dependent: :destroy
   
-  private
-
-  def multipla_escolha?
-    tipo == 'multipla_escolha'
-  end
-
+  validates :enunciado, presence: true
 end

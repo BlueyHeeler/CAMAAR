@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_142859) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_07_183644) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -82,12 +82,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_142859) do
   end
 
   create_table "questaos", force: :cascade do |t|
-    t.string "nome"
     t.text "texto"
-    t.string "tipo"
     t.integer "template_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "enunciado"
     t.index ["template_id"], name: "index_questaos_on_template_id"
   end
 

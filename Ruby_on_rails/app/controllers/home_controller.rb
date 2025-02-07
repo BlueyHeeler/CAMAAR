@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   end
 
   def gerenciamento_templates
+    @templates = Template.all
   end
 
   def authenticate
@@ -166,4 +167,9 @@ class HomeController < ApplicationController
       redirect_to home_homepage_path, alert: "Failed to import members: #{e.message}"
     end
   end
+
+  def gerenciamento_enviar_templates
+    @templates = Template.all
+  end
+  
 end

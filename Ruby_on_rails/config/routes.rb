@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   resources :respondidos
   resources :resposta
   resources :questao_options
-  resources :questaos
   resources :questionarios
-  resources :templates
+  resources :templates do
+    resources :questaos
+  end
   resources :matriculas
   resources :turmas
   resources :materia
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   root 'home#login'
   get 'home/login'
   get "login", to: "home#login"
-  get 'signup', to: 'users#new'     # Mostra formulário
+  get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
   post "login", to: "home#authenticate"
   delete "logout", to: "home#logout"
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   post 'home/import_data_classes'
   post 'home/import_data_members'
 
+  get 'home/gerenciamento_enviar_templates'
   get 'home/gerenciamento_templates'
   get 'home/homepage'
   get "up" => "rails/health#show", as: :rails_health_check

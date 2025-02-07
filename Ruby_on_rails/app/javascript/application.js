@@ -56,4 +56,41 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.readAsText(file);
   };
   window.importData = importData;
+
+  // Add questions form functionality
+  const addQuestionButton = document.getElementById('add-question');
+  if (addQuestionButton) {
+    let questionCount = 0;
+    
+    // Show/hide delete buttons based on question count
+    const updateDeleteButtons = () => {
+      const deleteButtons = document.querySelectorAll('.delete-question');
+      deleteButtons.forEach(button => {
+        button.style.display = deleteButtons.length > 1 ? 'block' : 'none';
+      });
+    };
+
+    // Handle delete question
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.classList.contains('delete-question')) {
+        e.target.closest('.question-fields').remove();
+        updateDeleteButtons();
+      }
+    });
+    
+    addQuestionButton.addEventListener('click', function() {
+      questionCount++;
+      const questionsContainer = document.getElementById('questions-container');
+      const newQuestionFields = questionsContainer.querySelector('.question-fields').cloneNode(true);
+      
+      newQuestionFields.querySelectorAll('textarea').forEach(input => {
+        input.value = '';
+        const fieldName = input.name.includes('enunciado') ? 'enunciado' : 'texto';
+        input.name = `questaos[${questionCount}][${fieldName}]`;
+      });
+      
+      questionsContainer.appendChild(newQuestionFields);
+      updateDeleteButtons();
+    });
+  }
 });

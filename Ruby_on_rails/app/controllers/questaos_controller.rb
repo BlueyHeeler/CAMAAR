@@ -1,4 +1,5 @@
 class QuestaosController < ApplicationController
+  before_action :set_template
   before_action :set_questao, only: %i[ show edit update destroy ]
 
   # GET /questaos or /questaos.json
@@ -12,7 +13,7 @@ class QuestaosController < ApplicationController
 
   # GET /questaos/new
   def new
-    @questao = Questao.new
+    @questao = @template.questaos.build
   end
 
   # GET /questaos/1/edit
@@ -21,14 +22,40 @@ class QuestaosController < ApplicationController
 
   # POST /questaos or /questaos.json
   def create
-    @questao = Questao.new(questao_params)
+    success = true
+    created_questions = []
+
+    if params[:questaos].present?
+      params[:questaos].values.each do |questao_data|
+        next if questao_data[:enunciado].blank? && questao_data[:texto].blank?
+        
+        @questao = @template.questaos.build(
+          enunciado: questao_data[:enunciado],
+          texto: questao_data[:texto]
+        )
+        
+        if @questao.save
+          created_questions << @questao
+        else
+          success = false
+          break
+        end
+      end
+    end
 
     respond_to do |format|
-      if @questao.save
-        format.html { redirect_to @questao, notice: "Questao was successfully created." }
-        format.json { render :show, status: :created, location: @questao }
+      if success && created_questions.any?
+        format.html { 
+          redirect_to @template, 
+          notice: "#{created_questions.size} questões foram adicionadas com sucesso." 
+        }
+        format.json { render :show, status: :created, location: @template }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        created_questions.each(&:destroy)
+        format.html { 
+          redirect_to new_template_questao_path(@template), 
+          alert: "Erro ao criar questões." 
+        }
         format.json { render json: @questao.errors, status: :unprocessable_entity }
       end
     end
@@ -59,12 +86,16 @@ class QuestaosController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_template
+      @template = Template.find(params[:template_id])
+    end
+
     def set_questao
-      @questao = Questao.find(params.expect(:id))
+      @questao = Questao.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def questao_params
-      params.expect(questao: [ :nome, :texto, :tipo, :template_id ])
+      params.permit(questaos: [:enunciado, :texto])
     end
 end

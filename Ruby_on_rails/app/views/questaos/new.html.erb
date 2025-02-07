@@ -1,11 +1,10 @@
-<% content_for :title, "New questao" %>
+<% content_for :title, "New questaos" %>
 
-<h1>New questao</h1>
+<h1>New questaos</h1>
 
-<%= render "form", questao: @questao %>
-
-<br>
-
-<div>
-  <%= link_to "Back to questaos", questaos_path %>
+<div id="questions-form">
+  <%= render "form", questao: @questao %>
 </div>
+
+<button type="button" id="add-question">Add Another Question</button>
+

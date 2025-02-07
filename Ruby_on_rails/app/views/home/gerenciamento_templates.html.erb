@@ -1,0 +1,18 @@
+<%= link_to "New Template", new_template_path %>
+<div class="existing-templates mb-4">
+  <h3>Templates Existentes</h3>
+  <div class="custom-row">
+    <% @templates.each do |template| %>
+      <div class="custom-col">
+        <div class="card" style="width: 12rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= template.nome %></h5>
+            <p>Semestre: <%= template.semestre %></p>
+            <%= link_to "New Question", new_template_questao_path(template), class: "btn btn-sm btn-primary" %>
+            <%= button_to "Destroy this template", template, method: :delete, class: "btn btn-sm btn-danger" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

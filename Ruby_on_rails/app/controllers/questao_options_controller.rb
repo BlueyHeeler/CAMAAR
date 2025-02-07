@@ -22,14 +22,17 @@ class QuestaoOptionsController < ApplicationController
   # POST /questao_options or /questao_options.json
   def create
     @questao_option = QuestaoOption.new(questao_option_params)
+    @questao = @questao_option.questao
 
     respond_to do |format|
       if @questao_option.save
-        format.html { redirect_to @questao_option, notice: "Questao option was successfully created." }
-        format.json { render :show, status: :created, location: @questao_option }
+        format.html { redirect_to @questao, notice: "Opção adicionada com sucesso." }
+        format.json { render json: @questao_option }
+        format.js
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @questao_option.errors, status: :unprocessable_entity }
+        format.html { redirect_to @questao, alert: "Erro ao adicionar opção." }
+        format.json { render json: @questao_option.errors }
+        format.js
       end
     end
   end
@@ -65,6 +68,6 @@ class QuestaoOptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def questao_option_params
-      params.expect(questao_option: [ :nome, :texto, :questao_id ])
+      params.require(:questao_option).permit(:texto, :questao_id)
     end
 end

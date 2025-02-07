@@ -1,10 +1,8 @@
 class Template < ApplicationRecord
-  has_many :questaos
-  has_many :questionarios
+  has_many :questaos, dependent: :destroy
+  accepts_nested_attributes_for :questaos, allow_destroy: true
 
-  def create_questions(questions_data)
-    questions_data.each do |data|
-      questaos.create(nome: data[:nome], texto: data[:texto], tipo: data[:tipo])
-    end
-  end
+  validates :nome, presence: true
+  validates :publico_alvo, presence: true
+  validates :semestre, presence: true
 end
