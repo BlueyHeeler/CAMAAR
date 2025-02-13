@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :respondidos
   resources :resposta
-  resources :questao_options
   resources :questionarios
   resources :templates do
     resources :questaos
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
   post 'home/import_data_classes'
   post 'home/import_data_members'
 
+  get 'home/gerenciamento_ver_respostas'
   get 'home/gerenciamento_enviar_templates'
   get 'home/gerenciamento_templates'
   get 'home/homepage'

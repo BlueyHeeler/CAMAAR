@@ -13,6 +13,8 @@ class RespostaController < ApplicationController
   # GET /resposta/new
   def new
     @respostum = Respostum.new
+    @questionario = Questionario.find(params[:questionario_id])
+    @questoes = @questionario.template.questaos
   end
 
   # GET /resposta/1/edit
@@ -21,16 +23,20 @@ class RespostaController < ApplicationController
 
   # POST /resposta or /resposta.json
   def create
-    @respostum = Respostum.new(respostum_params)
+    success = true
 
-    respond_to do |format|
-      if @respostum.save
-        format.html { redirect_to @respostum, notice: "Respostum was successfully created." }
-        format.json { render :show, status: :created, location: @respostum }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @respostum.errors, status: :unprocessable_entity }
+    params[:respostas].each do |resposta_params|
+      @respostum = Respostum.new(resposta_params.permit(:valor, :questao_id, :questionario_id, :user_id))
+      unless @respostum.save
+        success = false
+        break
       end
+    end
+
+    if success
+      redirect_to home_homepage_path, notice: "Respostas enviadas com sucesso."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -65,6 +71,6 @@ class RespostaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def respostum_params
-      params.expect(respostum: [ :valor, :questao_id, :questionario_id ])
+      params.expect(respostum: [:valor, :questao_id, :questionario_id, :user_id])
     end
 end

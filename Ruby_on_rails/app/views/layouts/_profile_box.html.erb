@@ -15,5 +15,8 @@
         <p><strong>Registration:</strong> <%= user.matricula %></p>
         <p><strong>Email:</strong> <%= user.email %></p>
         <p><strong>Role:</strong> <%= user.role.capitalize %></p>
+        <% if user.coordenador %>
+            <p><strong>Coordenador:</strong> <%= user.coordenador.departamento.nome %></p>
+        <% end %>
     </div>
 </div>

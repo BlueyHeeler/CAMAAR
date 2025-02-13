@@ -11,22 +11,26 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :valor, style: "display: block" %>
-    <%= form.text_field :valor %>
-  </div>
+  <%= form.hidden_field :questionario_id, value: @questionario.id %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <% @questoes.each do |questao| %>
+    <div class="question-container">
+      <h3>Enunciado: <%= simple_format(questao.enunciado) %></h3>
+      <h3><%= simple_format(questao.texto) %></h3>
+      <%= fields_for "respostas[]", Respostum.new do |resposta_form| %>
+        <div>
+          <%= resposta_form.label :valor, "Resposta", style: "display: block" %>
+          <%= resposta_form.text_area :valor %>
+          <%= resposta_form.hidden_field :questao_id, value: questao.id %>
+          <%= resposta_form.hidden_field :questionario_id, value: @questionario.id %>
+          <%= resposta_form.hidden_field :user_id, value: current_user.id %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
   <div>
-    <%= form.label :questao_id, style: "display: block" %>
-    <%= form.text_field :questao_id %>
-  </div>
-
-  <div>
-    <%= form.label :questionario_id, style: "display: block" %>
-    <%= form.text_field :questionario_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Enviar respostas" %>
   </div>
 <% end %>

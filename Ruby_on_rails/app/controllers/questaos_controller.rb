@@ -63,9 +63,14 @@ class QuestaosController < ApplicationController
 
   # PATCH/PUT /questaos/1 or /questaos/1.json
   def update
+    questao_data = params[:questaos]&.values&.first || params[:questao]
+    
     respond_to do |format|
-      if @questao.update(questao_params)
-        format.html { redirect_to @questao, notice: "Questao was successfully updated." }
+      if @questao.update(enunciado: questao_data[:enunciado], texto: questao_data[:texto])
+        format.html { 
+          redirect_to template_path(@template), 
+          notice: "Questão foi atualizada com sucesso." 
+        }
         format.json { render :show, status: :ok, location: @questao }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -79,7 +84,7 @@ class QuestaosController < ApplicationController
     @questao.destroy!
 
     respond_to do |format|
-      format.html { redirect_to questaos_path, status: :see_other, notice: "Questao was successfully destroyed." }
+      format.html { redirect_to template_path(@template), status: :see_other, notice: "Questao was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -96,6 +101,10 @@ class QuestaosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def questao_params
-      params.permit(questaos: [:enunciado, :texto])
+      if params[:questaos].present?
+        params.require(:questaos).require('0').permit(:enunciado, :texto)
+      else
+        params.require(:questao).permit(:enunciado, :texto)
+      end
     end
 end

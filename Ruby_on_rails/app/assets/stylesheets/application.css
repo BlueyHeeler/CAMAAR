@@ -71,16 +71,21 @@
 
     /* Container class can stay or be omitted */
   .container {
-    margin: 0 0 0 0px; /* Changed margin to move container left */
-    max-width: 200px; /* adjust as needed */
+    margin: 0; /* Removido auto */
+    max-width: 100%; /* Alterado para ocupar toda largura */
+    width: 100%;
+    padding: 0;
   }
 
   /* Row for a basic flex layout */
   .custom-row {
     display: flex;
-    gap: 2px;
-    flex-wrap: wrap;
-    margin: 0;
+    gap: 20px; /* Increased gap for better spacing */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    margin: 0; /* Removido margem */
+    padding: 20px;
+    justify-content: flex-start; /* Adicionar para alinhar à esquerda */
+    width: 100%;
   }
 
   /* Each column takes half the width */
@@ -128,9 +133,37 @@
   font-weight: bold;
 }
 
-.close:hover,
 .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.profile-section {
+  width: 180px; /* Largura fixa */
+  flex: 0 0 180px; /* Não cresce, não encolhe, mantém 180px */
+  margin: 0;
+  align-self: flex-start; /* Adicionar para garantir alinhamento ao topo */
+}
+
+.cards-section {
+  flex: 1;
+  display: flex; /* Mudado de grid para flex */
+  flex-wrap: wrap;
+  gap: 10px; /* Reduzido de 20px para 10px */
+  padding: 10px; /* Reduzido de 20px para 10px */
+  justify-content: flex-start; /* Alinhar cards à esquerda */
+  width: 100%;
+}
+
+.card-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.already-answered {
+  color: #666;
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
 }

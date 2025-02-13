@@ -2,9 +2,35 @@
 
 <%= render @template %>
 
+<div class="questoes-container mt-4">
+  <h3>Questões do Template</h3>
+  <% if @template.questaos.any? %>
+    <div class="questoes-list">
+      <% @template.questaos.each do |questao| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text"><%= questao.enunciado %></p>
+            <div class="btn-group" role="group">
+              <%= link_to "Edit", edit_template_questao_path(@template, questao), class: "btn btn-sm btn-warning" %>
+              <%= button_to "Delete", template_questao_path(@template, questao), 
+                  method: :delete, 
+                  class: "btn btn-sm btn-danger",
+                  form: { style: 'display: inline-block' },
+                  data: { confirm: "Are you sure?" } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>Este template ainda não possui questões.</p>
+  <% end %>
+</div>
+
 <div>
   <%= link_to "Edit this template", edit_template_path(@template) %> |
-  <%= link_to "Back to templates", templates_path %>
-
+  <br>
+  <%= link_to "Add New Question", new_template_questao_path(@template), class: "btn btn-primary" %>
+  <br>
   <%= button_to "Destroy this template", @template, method: :delete %>
 </div>

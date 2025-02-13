@@ -19,9 +19,8 @@
                 </div>
               <% end %>
             </div>
-
-            <%= link_to 'Editar', edit_template_path(template), class: "btn btn-sm btn-info" %>
-            <%= button_to "Destroy this template", template, method: :delete, class: "btn btn-sm btn-danger" %>
+            
+            <%= link_to "Criar Questionário", new_questionario_path(template_id: template.id), class: "btn btn-primary mt-2" %>
           </div>
         </div>
       </div>

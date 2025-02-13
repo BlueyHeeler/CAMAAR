@@ -8,11 +8,14 @@ class QuestionariosController < ApplicationController
 
   # GET /questionarios/1 or /questionarios/1.json
   def show
+    @questionario = Questionario.includes(respostas: :user, template: :questaos).find(params[:id])
   end
 
   # GET /questionarios/new
   def new
     @questionario = Questionario.new
+    @questionario.template_id = params[:template_id] if params[:template_id]
+    @turmas = Turma.all  # Add this line to fetch all turmas
   end
 
   # GET /questionarios/1/edit
@@ -65,6 +68,6 @@ class QuestionariosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def questionario_params
-      params.expect(questionario: [ :nome, :turma_id, :template_id ])
+      params.expect(questionario: [ :nome, :turma_id, :template_id, :user_id ]).permit(:nome, :turma_id, :template_id, :user_id)
     end
 end

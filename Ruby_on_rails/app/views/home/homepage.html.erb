@@ -1,30 +1,50 @@
 <div class="container">
   <% if current_user %>
-    <div class="custom-row">
+    <div class="custom-row d-flex">
       <% if current_user.student? %>
-        <div class="custom-col">
+        <div class="profile-section">
           <%= render 'layouts/profile_box', user: current_user %>
         </div>
-        <% if current_user.registro_matricula %> 
-          <% current_user.registro_matricula.turma.questionarios.each do |questionario| %>
+        <div class="cards-section">
+          <% if current_user.registro_matricula %> 
+            <% current_user.registro_matricula.each do |matricula| %>
+              <% matricula.turma.questionarios.each do |questionario| %>
+                <% if !questionario.respostas.exists?(user: current_user) %>
+                  <%= render 'layouts/card_box', 
+                      title: questionario.nome, 
+                      content: questionario.template.semestre, 
+                      professor: questionario.user.nome,
+                      materia: questionario.turma.materium.nome,
+                      questionario: questionario %>
+                <% else %>
+                  <div class="card-disabled">
+                    <%= render 'layouts/card_box', 
+                        title: questionario.nome, 
+                        content: questionario.template.semestre, 
+                        professor: questionario.user.nome,
+                        materia: questionario.turma.materium.nome,
+                        questionario: nil %>
+                    <div class="already-answered">Você já respondeu este questionário</div>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="profile-section">
+          <%= render 'layouts/profile_box', user: current_user %>
+        </div>
+        <div class="cards-section">
+          <% current_user.questionarios.each do |questionario| %>
             <%= render 'layouts/card_box', 
             title: questionario.nome, 
             content: questionario.template.semestre, 
-            professor: questionario.template.publico_alvo %>
-            <br>
-        <% end %>
-        <% end %>
-      <% else %>
-      <div class="custom-col">
-        <%= render 'layouts/profile_box', user: current_user %>
-      </div>
-      <% current_user.questionarios.each do |questionario| %>
-        <%= render 'layouts/card_box', 
-        title: questionario.nome, 
-        content: questionario.template.semestre, 
-        professor: questionario.template.publico_alvo %>
-        <br>
-        <% end %>
+            professor: questionario.user.nome,
+            materia: questionario.turma.materium.nome,
+            questionario: questionario %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   <% end %>

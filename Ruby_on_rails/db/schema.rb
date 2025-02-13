@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_07_183644) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_13_192213) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -117,8 +117,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_07_183644) do
     t.integer "questionario_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["questao_id"], name: "index_resposta_on_questao_id"
     t.index ["questionario_id"], name: "index_resposta_on_questionario_id"
+    t.index ["user_id"], name: "index_resposta_on_user_id"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -165,5 +167,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_07_183644) do
   add_foreign_key "respondidos", "users"
   add_foreign_key "resposta", "questaos"
   add_foreign_key "resposta", "questionarios"
+  add_foreign_key "resposta", "users"
   add_foreign_key "turmas", "materia"
 end

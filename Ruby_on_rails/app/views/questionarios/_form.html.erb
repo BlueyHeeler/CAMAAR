@@ -1,4 +1,5 @@
 <%= form_with(model: questionario) do |form| %>
+  
   <% if questionario.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(questionario.errors.count, "error") %> prohibited this questionario from being saved:</h2>
@@ -17,16 +18,20 @@
   </div>
 
   <div>
-    <%= form.label :turma_id, style: "display: block" %>
-    <%= form.text_field :turma_id %>
-  </div>
+  <%= form.label :turma_id, "Turma", style: "display: block" %>
+  <%= form.collection_select :turma_id, 
+      Turma.includes(:materium).all, 
+      :id, 
+      ->(turma) { "#{turma.codigo} - #{turma.materium.nome}" }, 
+      { prompt: "Selecione uma turma" }, 
+      class: "form-select" 
+  %>
+</div>
+
+  <%= form.hidden_field :template_id %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
 
   <div>
-    <%= form.label :template_id, style: "display: block" %>
-    <%= form.text_field :template_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Criar Questionário", class: "btn btn-primary mt-3" %>
   </div>
 <% end %>

@@ -2,9 +2,45 @@
 
 <%= render @questionario %>
 
-<div>
-  <%= link_to "Edit this questionario", edit_questionario_path(@questionario) %> |
-  <%= link_to "Back to questionarios", questionarios_path %>
+<div class="responses-section">
+  <h2>Respostas dos Alunos</h2>
+  
+  <% @questionario.template.questaos.each do |questao| %>
+    <div class="questao-box">
+      <h3>Enunciado: <%= simple_format(questao.enunciado) %></h3>
+      <h3>Questão: <%= simple_format(questao.texto) %></h3>
+      
+      <% respostas = @questionario.respostas.where(questao: questao) %>
+      <% if respostas.any? %>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Resposta</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% respostas.each do |resposta| %>
+              <tr>
+                <td><%= resposta.user.nome %></td>
+                <td><%= resposta.valor %></td>
+                <td><%= resposta.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>Ainda não há respostas para esta questão.</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="actions">
+  <%= link_to "Edit this questionario", edit_questionario_path(@questionario) %> 
+  <br>
+  <%= link_to "Back to resultados", home_homepage_path %>
 
   <%= button_to "Destroy this questionario", @questionario, method: :delete %>
 </div>

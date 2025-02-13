@@ -1,11 +1,8 @@
-<% content_for :title, "New respostum" %>
-
-<h1>New respostum</h1>
-
+<% content_for :title, "Questionário: #{@questionario.nome}" %>
+<h1><%= @questionario.nome %></h1>
+<h2><%= "Responda com cuidado, não é possível editar !" %></h2>
 <%= render "form", respostum: @respostum %>
 
-<br>
-
 <div>
-  <%= link_to "Back to resposta", resposta_path %>
+  <%= link_to "Voltar", home_homepage_path %>
 </div>

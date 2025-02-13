@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-    has_one :registro_matricula, class_name: 'Matricula', foreign_key: 'user_id'
-    has_many :questionarios
+    has_many :registro_matricula, dependent: :destroy, class_name: 'Matricula', foreign_key: 'user_id'
+    has_one :coordenador, class_name: 'Coordenador', foreign_key: 'user_id'
+    has_many :questionarios, dependent: :destroy
+    has_many :resposta, dependent: :destroy
     has_secure_password
     has_one_attached :avatar
     validates :password, presence: true

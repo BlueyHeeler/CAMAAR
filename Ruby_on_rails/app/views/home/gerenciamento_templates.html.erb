@@ -9,6 +9,7 @@
             <h5 class="card-title"><%= template.nome %></h5>
             <p>Semestre: <%= template.semestre %></p>
             <%= link_to "New Question", new_template_questao_path(template), class: "btn btn-sm btn-primary" %>
+            <%= link_to 'Show', template, class: "btn btn-sm btn-info" %>
             <%= button_to "Destroy this template", template, method: :delete, class: "btn btn-sm btn-danger" %>
           </div>
         </div>
