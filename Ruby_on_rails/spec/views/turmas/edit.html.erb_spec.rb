@@ -17,7 +17,6 @@ RSpec.describe "turmas/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", turma_path(turma), "post" do
-
       assert_select "input[name=?]", "turma[codigo]"
 
       assert_select "input[name=?]", "turma[semestre]"

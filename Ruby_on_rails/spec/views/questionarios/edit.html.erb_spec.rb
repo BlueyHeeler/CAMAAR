@@ -17,7 +17,6 @@ RSpec.describe "questionarios/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", questionario_path(questionario), "post" do
-
       assert_select "input[name=?]", "questionario[nome]"
 
       assert_select "input[name=?]", "questionario[turma_id]"

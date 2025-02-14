@@ -71,6 +71,6 @@ class RespostaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def respostum_params
-      params.expect(respostum: [:valor, :questao_id, :questionario_id, :user_id])
+      params.expect(respostum: [ :valor, :questao_id, :questionario_id, :user_id ])
     end
 end

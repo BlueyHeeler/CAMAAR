@@ -13,7 +13,6 @@ RSpec.describe "questionarios/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", questionarios_path, "post" do
-
       assert_select "input[name=?]", "questionario[nome]"
 
       assert_select "input[name=?]", "questionario[turma_id]"

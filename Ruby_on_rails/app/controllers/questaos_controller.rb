@@ -28,12 +28,12 @@ class QuestaosController < ApplicationController
     if params[:questaos].present?
       params[:questaos].values.each do |questao_data|
         next if questao_data[:enunciado].blank? && questao_data[:texto].blank?
-        
+
         @questao = @template.questaos.build(
           enunciado: questao_data[:enunciado],
           texto: questao_data[:texto]
         )
-        
+
         if @questao.save
           created_questions << @questao
         else
@@ -45,16 +45,16 @@ class QuestaosController < ApplicationController
 
     respond_to do |format|
       if success && created_questions.any?
-        format.html { 
-          redirect_to @template, 
-          notice: "#{created_questions.size} questões foram adicionadas com sucesso." 
+        format.html {
+          redirect_to @template,
+          notice: "#{created_questions.size} questões foram adicionadas com sucesso."
         }
         format.json { render :show, status: :created, location: @template }
       else
         created_questions.each(&:destroy)
-        format.html { 
-          redirect_to new_template_questao_path(@template), 
-          alert: "Erro ao criar questões." 
+        format.html {
+          redirect_to new_template_questao_path(@template),
+          alert: "Erro ao criar questões."
         }
         format.json { render json: @questao.errors, status: :unprocessable_entity }
       end
@@ -64,12 +64,12 @@ class QuestaosController < ApplicationController
   # PATCH/PUT /questaos/1 or /questaos/1.json
   def update
     questao_data = params[:questaos]&.values&.first || params[:questao]
-    
+
     respond_to do |format|
       if @questao.update(enunciado: questao_data[:enunciado], texto: questao_data[:texto])
-        format.html { 
-          redirect_to template_path(@template), 
-          notice: "Questão foi atualizada com sucesso." 
+        format.html {
+          redirect_to template_path(@template),
+          notice: "Questão foi atualizada com sucesso."
         }
         format.json { render :show, status: :ok, location: @questao }
       else
@@ -102,7 +102,7 @@ class QuestaosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def questao_params
       if params[:questaos].present?
-        params.require(:questaos).require('0').permit(:enunciado, :texto)
+        params.require(:questaos).require("0").permit(:enunciado, :texto)
       else
         params.require(:questao).permit(:enunciado, :texto)
       end

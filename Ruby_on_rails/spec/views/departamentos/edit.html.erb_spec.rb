@@ -15,7 +15,6 @@ RSpec.describe "departamentos/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", departamento_path(departamento), "post" do
-
       assert_select "input[name=?]", "departamento[nome]"
     end
   end

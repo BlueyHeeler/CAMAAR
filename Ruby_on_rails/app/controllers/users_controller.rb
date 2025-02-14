@@ -37,6 +37,12 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    # Remove password from params if it's blank
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: "User was successfully updated." }
@@ -66,6 +72,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:matricula, :email, :nome, :role, :password, :password_confirmation)
+      params.require(:user).permit(:matricula, :email, :nome, :role, :password, :password_confirmation, :avatar)
     end
 end

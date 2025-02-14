@@ -13,7 +13,6 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/materia", type: :request do
-  
   # This should return the minimal set of attributes required to create a valid
   # Materium. As you add validations to Materium, be sure to
   # adjust the attributes here as well.
@@ -77,12 +76,11 @@ RSpec.describe "/materia", type: :request do
         }.to change(Materium, :count).by(0)
       end
 
-    
+
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post materia_url, params: { materium: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
@@ -108,13 +106,11 @@ RSpec.describe "/materia", type: :request do
     end
 
     context "with invalid parameters" do
-    
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         materium = Materium.create! valid_attributes
         patch materium_url(materium), params: { materium: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 

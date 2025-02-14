@@ -13,7 +13,6 @@ RSpec.describe "templates/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", templates_path, "post" do
-
       assert_select "input[name=?]", "template[nome]"
 
       assert_select "input[name=?]", "template[publico_alvo]"

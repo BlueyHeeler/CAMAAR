@@ -12,7 +12,6 @@ RSpec.describe "respondidos/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", respondidos_path, "post" do
-
       assert_select "input[name=?]", "respondido[questionario_id]"
 
       assert_select "input[name=?]", "respondido[user_id]"

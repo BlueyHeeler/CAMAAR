@@ -37,7 +37,11 @@ test:
 # Executa o RuboCop para verificação de padrão de código
 rubocop: 
 	@echo "Verificando padrão de código com RuboCop..."
-	bundle exec rubocop --auto-correct app/models app/controllers app/views features config/routes.rb
+	bundle exec rubocop
+
+rubocop_autocorrect: 
+	@echo "Corrigindo código automaticamente com RuboCop..."
+	bundle exec rubocop --autocorrect
 
 # Executa o Reek para detectar possíveis 'code smells'
 reek: 

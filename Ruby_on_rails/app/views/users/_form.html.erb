@@ -11,10 +11,22 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :matricula, style: "display: block" %>
-    <%= form.text_field :matricula %>
-  </div>
+  <% unless user.role == 'student' %>
+    <div>
+      <%= form.label :matricula, style: "display: block" %>
+      <%= form.text_field :matricula %>
+    </div>
+
+    <div>
+      <%= form.label :nome, style: "display: block" %>
+      <%= form.text_field :nome %>
+    </div>
+
+    <div>
+      <%= form.label :role, style: "display: block" %>
+      <%= form.text_field :role %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.label :email, style: "display: block" %>
@@ -22,18 +34,20 @@
   </div>
 
   <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
+    <%= form.label :password, "#{user.new_record? ? 'Password' : 'New Password (optional)'}", style: "display: block" %>
+    <%= form.password_field :password, 
+                           class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :role, style: "display: block" %>
-    <%= form.text_field :role %>
+    <%= form.label :password_confirmation, "#{user.new_record? ? 'Password Confirmation' : 'Confirm New Password (optional)'}", style: "display: block" %>
+    <%= form.password_field :password_confirmation,
+                           class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :password_digest, style: "display: block" %>
-    <%= form.text_field :password_digest %>
+    <%= form.label :avatar, "Profile Picture: " %>
+    <%= form.file_field :avatar, accept: 'image/*' %>
   </div>
 
   <div>

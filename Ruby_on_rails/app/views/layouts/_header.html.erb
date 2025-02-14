@@ -5,10 +5,12 @@
         <li><a href="#" id="open-popup">Importar dados</a></li>
         <li><%= link_to "Editar templates", home_gerenciamento_templates_path %></li>
         <li><%= link_to "Enviar Formulários", home_gerenciamento_enviar_templates_path %></li>
+        <li><%= link_to "Users", users_path %></li> 
         <li><%= link_to "Resultados", home_homepage_path %></li>
       <% else %>
         <li><%= link_to "Homepage", home_homepage_path %></li>
       <% end %>
+      <li><%= link_to "Perfil", current_user %></li>
       <li><%= link_to "Logout", root_path %></li>
     </ul>
   </nav>

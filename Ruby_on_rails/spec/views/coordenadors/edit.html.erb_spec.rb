@@ -16,7 +16,6 @@ RSpec.describe "coordenadors/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", coordenador_path(coordenador), "post" do
-
       assert_select "input[name=?]", "coordenador[departamento_id]"
 
       assert_select "input[name=?]", "coordenador[user_id]"

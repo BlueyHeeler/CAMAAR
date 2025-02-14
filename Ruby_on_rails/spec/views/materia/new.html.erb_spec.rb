@@ -13,7 +13,6 @@ RSpec.describe "materia/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", materia_path, "post" do
-
       assert_select "input[name=?]", "materium[nome]"
 
       assert_select "input[name=?]", "materium[codigo]"

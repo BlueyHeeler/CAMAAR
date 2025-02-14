@@ -1,3 +1,3 @@
 class Departamento < ApplicationRecord
-    has_many :materiums 
+    has_many :materiums
 end

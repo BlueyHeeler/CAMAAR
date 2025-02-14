@@ -13,7 +13,6 @@ RSpec.describe "questao_options/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", questao_options_path, "post" do
-
       assert_select "input[name=?]", "questao_option[nome]"
 
       assert_select "textarea[name=?]", "questao_option[texto]"

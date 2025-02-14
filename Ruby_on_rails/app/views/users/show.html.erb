@@ -2,9 +2,35 @@
 
 <%= render @user %>
 
+<% if @user.role == 'student' %>
+  <div class="matriculas-section">
+    <h2>Matrículas</h2>
+    <% if @user.registro_matricula.any? %>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>SEmestre</th>
+            <th>Materia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.registro_matricula.each do |matricula| %>
+            <tr>
+              <td><%= matricula.turma.codigo %></td>
+              <td><%= matricula.turma.semestre %></td>
+              <td><%= matricula.turma.materium.nome %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>Este aluno não possui matrículas.</p>
+    <% end %>
+  </div>
+<% end %>
+
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-
-  <%= button_to "Destroy this user", @user, method: :delete %>
+  <%= link_to "Back", home_homepage_path %>
 </div>

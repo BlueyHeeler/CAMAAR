@@ -16,7 +16,6 @@ RSpec.describe "matriculas/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", matricula_path(matricula), "post" do
-
       assert_select "input[name=?]", "matricula[user_id]"
 
       assert_select "input[name=?]", "matricula[turma_id]"

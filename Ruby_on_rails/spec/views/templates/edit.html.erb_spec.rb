@@ -17,7 +17,6 @@ RSpec.describe "templates/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", template_path(template), "post" do
-
       assert_select "input[name=?]", "template[nome]"
 
       assert_select "input[name=?]", "template[publico_alvo]"

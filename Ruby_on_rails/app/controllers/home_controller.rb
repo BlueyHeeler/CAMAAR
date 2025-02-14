@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  
   def login
   end
 
@@ -24,11 +23,11 @@ class HomeController < ApplicationController
       session[:user_role] = user.role
 
       success_path = case user.role
-        when "admin"
+      when "admin"
           home_homepage_path
-        when "student"
+      when "student"
           home_homepage_path
-        else
+      else
           root_path
       end
 
@@ -50,7 +49,7 @@ class HomeController < ApplicationController
 
       imported_data.each do |data|
         puts "\nProcessing: #{data.inspect}"
-        
+
         begin
           materia = Materia.find_or_create_by!(
             codigo: data["code"],
@@ -78,11 +77,11 @@ class HomeController < ApplicationController
           raise e
         end
       end
-      
+
       puts "\n=== Import Summary ==="
       puts "Total Materias: #{Materia.count}"
       puts "Total Turmas: #{Turma.count}"
-      
+
       redirect_to home_homepage_path, notice: "Classes imported successfully"
     rescue => e
       puts "Error importing classes: #{e.message}"
@@ -171,5 +170,4 @@ class HomeController < ApplicationController
   def gerenciamento_enviar_templates
     @templates = Template.all
   end
-  
 end

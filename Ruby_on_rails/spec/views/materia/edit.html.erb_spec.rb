@@ -17,7 +17,6 @@ RSpec.describe "materia/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", materium_path(materium), "post" do
-
       assert_select "input[name=?]", "materium[nome]"
 
       assert_select "input[name=?]", "materium[codigo]"
