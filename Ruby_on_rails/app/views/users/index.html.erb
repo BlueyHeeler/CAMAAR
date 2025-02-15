@@ -9,7 +9,9 @@
     <thead>
       <tr>
         <th>Nome</th>
+        <th>Matrícula</th>
         <th>Email</th>
+        <th>Role</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -17,7 +19,9 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.nome %></td>
+          <td><%= user.matricula %></td>
           <td><%= user.email %></td>
+          <td><%= user.role %></td>
           <td><%= link_to "Show this user", user %></td>
         </tr>
       <% end %>

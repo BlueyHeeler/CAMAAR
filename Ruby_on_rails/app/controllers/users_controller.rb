@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to login_path, notice: "User was successfully created." }
+        format.html { redirect_to login_path }
         format.json { render :show, status: :created, location: @user }
       else
         flash[:alert] = "Registration with an email already registered"
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: "User was successfully updated." }
+        format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     @user.destroy!
 
     respond_to do |format|
-      format.html { redirect_to users_path, status: :see_other, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_path, status: :see_other }
       format.json { head :no_content }
     end
   end

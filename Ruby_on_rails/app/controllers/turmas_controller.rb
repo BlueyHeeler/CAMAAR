@@ -25,7 +25,7 @@ class TurmasController < ApplicationController
 
     respond_to do |format|
       if @turma.save
-        format.html { redirect_to @turma, notice: "Turma was successfully created." }
+        format.html { redirect_to @turma }
         format.json { render :show, status: :created, location: @turma }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TurmasController < ApplicationController
   def update
     respond_to do |format|
       if @turma.update(turma_params)
-        format.html { redirect_to @turma, notice: "Turma was successfully updated." }
+        format.html { redirect_to @turma }
         format.json { render :show, status: :ok, location: @turma }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class TurmasController < ApplicationController
     @turma.destroy!
 
     respond_to do |format|
-      format.html { redirect_to turmas_path, status: :see_other, notice: "Turma was successfully destroyed." }
+      format.html { redirect_to turmas_path, status: :see_other }
       format.json { head :no_content }
     end
   end

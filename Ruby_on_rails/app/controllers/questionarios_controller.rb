@@ -28,7 +28,7 @@ class QuestionariosController < ApplicationController
 
     respond_to do |format|
       if @questionario.save
-        format.html { redirect_to @questionario, notice: "Questionario was successfully created." }
+        format.html { redirect_to @questionario }
         format.json { render :show, status: :created, location: @questionario }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class QuestionariosController < ApplicationController
   def update
     respond_to do |format|
       if @questionario.update(questionario_params)
-        format.html { redirect_to @questionario, notice: "Questionario was successfully updated." }
+        format.html { redirect_to @questionario }
         format.json { render :show, status: :ok, location: @questionario }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class QuestionariosController < ApplicationController
     @questionario.destroy!
 
     respond_to do |format|
-      format.html { redirect_to questionarios_path, status: :see_other, notice: "Questionario was successfully destroyed." }
+      format.html { redirect_to home_gerenciamento_enviar_templates_path, status: :see_other }
       format.json { head :no_content }
     end
   end

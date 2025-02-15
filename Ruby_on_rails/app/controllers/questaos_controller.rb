@@ -46,8 +46,7 @@ class QuestaosController < ApplicationController
     respond_to do |format|
       if success && created_questions.any?
         format.html {
-          redirect_to @template,
-          notice: "#{created_questions.size} questões foram adicionadas com sucesso."
+          redirect_to @template
         }
         format.json { render :show, status: :created, location: @template }
       else
@@ -68,8 +67,7 @@ class QuestaosController < ApplicationController
     respond_to do |format|
       if @questao.update(enunciado: questao_data[:enunciado], texto: questao_data[:texto])
         format.html {
-          redirect_to template_path(@template),
-          notice: "Questão foi atualizada com sucesso."
+          redirect_to template_path(@template)
         }
         format.json { render :show, status: :ok, location: @questao }
       else
@@ -84,7 +82,7 @@ class QuestaosController < ApplicationController
     @questao.destroy!
 
     respond_to do |format|
-      format.html { redirect_to template_path(@template), status: :see_other, notice: "Questao was successfully destroyed." }
+      format.html { redirect_to template_path(@template), status: :see_other}
       format.json { head :no_content }
     end
   end

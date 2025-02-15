@@ -5,13 +5,13 @@ Feature: HomePage Participante
   And edit my profile account
 
     Background:
-        Given I am a PARTICIPANTE
+        Given I am a student
 
-    Scenario: Managing my profile account as PARTICIPANTE
-        When I visit the homepage as a PARTICIPANTE
-        Then I want to be able to enter my profile page by clicking in my perfil avatar
-        Then I want to be redirected to user_update page
-        And Be able to change my profile picture
+    Scenario: Managing my profile account as student
+        When I visit the homepage as a student
+        Then I want to be able to enter my profile page by clicking in profile
+        Then I want to be redirected to user page
+        And be able to change my profile picture
         
     Scenario: HomePage as PARTICIPANTE
         When I visit the homepage as a PARTICIPANTE

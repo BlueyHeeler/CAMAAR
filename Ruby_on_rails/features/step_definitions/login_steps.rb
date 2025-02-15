@@ -36,7 +36,3 @@ end
 Then('I should not see the {string} button') do |button|
   expect(page).not_to have_button(button)
 end
-
-Then('I should see the error message {string}') do |message|
-  expect(page).to have_content(message)
-end

@@ -25,7 +25,7 @@ class CoordenadorsController < ApplicationController
 
     respond_to do |format|
       if @coordenador.save
-        format.html { redirect_to @coordenador, notice: "Coordenador was successfully created." }
+        format.html { redirect_to @coordenador }
         format.json { render :show, status: :created, location: @coordenador }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class CoordenadorsController < ApplicationController
   def update
     respond_to do |format|
       if @coordenador.update(coordenador_params)
-        format.html { redirect_to @coordenador, notice: "Coordenador was successfully updated." }
+        format.html { redirect_to @coordenador}
         format.json { render :show, status: :ok, location: @coordenador }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class CoordenadorsController < ApplicationController
     @coordenador.destroy!
 
     respond_to do |format|
-      format.html { redirect_to coordenadors_path, status: :see_other, notice: "Coordenador was successfully destroyed." }
+      format.html { redirect_to coordenadors_path, status: :see_other }
       format.json { head :no_content }
     end
   end

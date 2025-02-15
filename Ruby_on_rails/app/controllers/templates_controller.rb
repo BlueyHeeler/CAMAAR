@@ -25,7 +25,7 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to home_gerenciamento_templates_path, notice: "Template was successfully created." }
+        format.html { redirect_to home_gerenciamento_templates_path }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to home_gerenciamento_templates_path, notice: "Template was successfully updated." }
+        format.html { redirect_to home_gerenciamento_templates_path }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class TemplatesController < ApplicationController
     @template.destroy!
 
     respond_to do |format|
-      format.html { redirect_to home_gerenciamento_templates_path, status: :see_other, notice: "Template was successfully destroyed." }
+      format.html { redirect_to home_gerenciamento_templates_path, status: :see_other }
       format.json { head :no_content }
     end
   end

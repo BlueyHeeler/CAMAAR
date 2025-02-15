@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% unless user.role == 'student' %>
+  <% if current_user.role == 'admin'%>
     <div>
       <%= form.label :matricula, style: "display: block" %>
       <%= form.text_field :matricula %>

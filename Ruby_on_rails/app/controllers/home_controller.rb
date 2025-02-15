@@ -23,15 +23,13 @@ class HomeController < ApplicationController
       session[:user_role] = user.role
 
       success_path = case user.role
-      when "admin"
-          home_homepage_path
-      when "student"
+      when "admin", "professor", "student"
           home_homepage_path
       else
           root_path
       end
 
-      redirect_to success_path, notice: "Logged in successfully"
+      redirect_to success_path
     else
       flash.now[:alert] = "Invalid password"
       render :login, status: :unprocessable_entity
@@ -43,12 +41,8 @@ class HomeController < ApplicationController
       imported_data = JSON.parse(params[:imported_data])
       department_name = params[:department_name]
       department = Departamento.find_or_create_by!(nome: department_name)
-      puts "\n=== Starting Import ==="
-      puts "Department: #{department.inspect}"
-      puts "Total items to import: #{imported_data.length}"
 
       imported_data.each do |data|
-        puts "\nProcessing: #{data.inspect}"
 
         begin
           materia = Materia.find_or_create_by!(
@@ -56,7 +50,6 @@ class HomeController < ApplicationController
             nome: data["name"],
             departamento: department
           )
-          puts "Successfully created/found Materia: #{materia.inspect}"
 
           begin
             turma = Turma.find_or_create_by!(
@@ -65,27 +58,16 @@ class HomeController < ApplicationController
               horario: data["class"]["time"],
               materium_id: materia.id
             )
-            puts "Successfully created/found Turma: #{turma.inspect}"
           rescue => e
-            puts "Error creating Turma: #{e.message}"
-            puts "Turma data: #{data["class"].inspect}"
             raise e
           end
         rescue => e
-          puts "Error creating Materia: #{e.message}"
-          puts "Materia data: #{data.inspect}"
           raise e
         end
       end
 
-      puts "\n=== Import Summary ==="
-      puts "Total Materias: #{Materia.count}"
-      puts "Total Turmas: #{Turma.count}"
-
-      redirect_to home_homepage_path, notice: "Classes imported successfully"
+      redirect_to home_homepage_path
     rescue => e
-      puts "Error importing classes: #{e.message}"
-      puts "Full error: #{e.inspect}"
       redirect_to home_homepage_path, alert: "Failed to import classes: #{e.message}"
     end
   end
@@ -95,9 +77,6 @@ class HomeController < ApplicationController
       imported_data = JSON.parse(params[:imported_data])
       department_name = params[:department_name]
       department = Departamento.find_or_create_by!(nome: department_name)
-
-      puts "\n=== Starting Member Import ==="
-      puts "Department: #{department.inspect}"
 
       imported_data.each do |data|
         # Get the turma before processing users
@@ -109,7 +88,6 @@ class HomeController < ApplicationController
           semestre: data["semester"],
           materium_id: materia.id
         )
-        puts "\nFound Turma: #{turma.inspect}"
 
         # Import dicentes
         if data["dicente"] && turma.present?
@@ -128,13 +106,11 @@ class HomeController < ApplicationController
               user.password_confirmation = "password123"
               user.save!
             end
-            puts "Created/Found Student: #{user.inspect}"
 
             matricula = Matricula.find_or_create_by!(
               user_id: user.id,
               turma_id: turma.id
             )
-            puts "Created/Found Matricula: #{matricula.inspect}"
           end
         end
 
@@ -147,7 +123,7 @@ class HomeController < ApplicationController
             matricula: docente_data["usuario"],
             email: docente_data["email"],
             nome: docente_data["nome"],
-            role: "admin"
+            role: "professor"
           ).first_or_initialize
 
           if user.new_record?
@@ -155,14 +131,16 @@ class HomeController < ApplicationController
             user.password_confirmation = "password123"
             user.save!
           end
-          puts "Created/Found Professor: #{user.inspect}"
+
+          matricula = Matricula.find_or_create_by!(
+              user_id: user.id,
+              turma_id: turma.id
+            )
         end
       end
 
-      redirect_to home_homepage_path, notice: "Members imported successfully"
+      redirect_to home_homepage_path
     rescue => e
-      puts "Error importing members: #{e.message}"
-      puts "Full error: #{e.inspect}"
       redirect_to home_homepage_path, alert: "Failed to import members: #{e.message}"
     end
   end
