@@ -10,7 +10,6 @@ class User < ApplicationRecord
     validates :role, inclusion: { in: ["admin", "professor", "student"] }
 
     before_save :update_timestamp
-    before_destroy :cleanup_associations
 
     def admin?
         role == "admin"

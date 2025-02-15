@@ -1,0 +1,13 @@
+sqlite3:
+  # checksum verified by first checking the published sha3(256) checksum against https://sqlite.org/download.html:
+  # 52cd4a2304b627abbabe1a438ba853d0f6edb8e2774fcb5773c7af11077afe94
+  #
+  # $ sha3sum -a 256 ports/archives/sqlite-autoconf-3470200.tar.gz
+  # 52cd4a2304b627abbabe1a438ba853d0f6edb8e2774fcb5773c7af11077afe94  ports/archives/sqlite-autoconf-3470200.tar.gz
+  #
+  # $ sha256sum ports/archives/sqlite-autoconf-3470200.tar.gz
+  # f1b2ee412c28d7472bc95ba996368d6f0cdcf00362affdadb27ed286c179540b  ports/archives/sqlite-autoconf-3470200.tar.gz
+  version: "3.47.2"
+  files:
+    - url: "https://sqlite.org/2024/sqlite-autoconf-3470200.tar.gz"
+      sha256: "f1b2ee412c28d7472bc95ba996368d6f0cdcf00362affdadb27ed286c179540b"
