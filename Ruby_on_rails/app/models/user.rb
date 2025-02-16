@@ -5,9 +5,9 @@ class User < ApplicationRecord
     has_many :resposta, dependent: :destroy
     has_one_attached :avatar, dependent: :destroy
     has_secure_password
-    
+
     validates :password, presence: true, on: :create
-    validates :role, inclusion: { in: ["admin", "professor", "student"] }
+    validates :role, inclusion: { in: [ "admin", "professor", "student" ] }
 
     before_save :update_timestamp
 
@@ -24,7 +24,7 @@ class User < ApplicationRecord
     end
 
     def update_role(new_role)
-        if ["admin", "professor", "student"].include?(new_role)
+        if [ "admin", "professor", "student" ].include?(new_role)
             update(role: new_role)
         else
             errors.add(:role, "must be admin, professor, or student")

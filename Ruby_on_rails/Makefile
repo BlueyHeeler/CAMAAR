@@ -10,19 +10,14 @@ install:
 	bundle install
 
 # Configura o banco de dados (cria, migra e popula com dados seed)
-setup: 
+status: 
 	@echo "Configurando o banco de dados..."
-	rails db:setup
+	rails db:migrate:status
 
 # Executa as migrações do banco de dados
 migrate: 
 	@echo "Executando migrações..."
 	rails db:migrate
-
-# Executa o seed do banco de dados (caso necessário)
-seed: 
-	@echo "Popular banco de dados..."
-	rails db:seed
 
 # Inicia o servidor Rails
 server: 
@@ -34,11 +29,17 @@ test:
 	@echo "Executando testes com Cucumber..."
 	bundle exec cucumber
 
+# Executa os testes automatizados (RSpec)
+rspec:
+	@echo "Executando testes com RSpec..."
+	bundle exec rspec spec
+
 # Executa o RuboCop para verificação de padrão de código
 rubocop: 
 	@echo "Verificando padrão de código com RuboCop..."
 	bundle exec rubocop
 
+# Executa o RuboCop para correção automática de padrão de código
 rubocop_autocorrect: 
 	@echo "Corrigindo código automaticamente com RuboCop..."
 	bundle exec rubocop --autocorrect
@@ -52,11 +53,3 @@ reek:
 yard: 
 	@echo "Gerando documentação com YARD..."
 	yard doc
-
-rspec:
-	@echo "Executando testes com RSpec..."
-	bundle exec rspec spec/features
-
-# Tarefa padrão: instala as gems e executa as migrações
-all: install migrate
-	@echo "Projeto preparado!"

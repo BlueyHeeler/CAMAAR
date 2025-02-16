@@ -27,7 +27,7 @@ RSpec.describe Template, type: :model do
   end
 
   it "accepts nested attributes for questaos" do
-    template = Template.new(nome: "Template Test", publico_alvo: "Publico Teste", semestre: "2023/1", questaos_attributes: [{ enunciado: "Questao Teste" }])
+    template = Template.new(nome: "Template Test", publico_alvo: "Publico Teste", semestre: "2023/1", questaos_attributes: [ { enunciado: "Questao Teste" } ])
     expect(template.questaos.first.enunciado).to eq("Questao Teste")
   end
 

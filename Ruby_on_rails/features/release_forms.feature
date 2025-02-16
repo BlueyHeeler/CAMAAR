@@ -5,23 +5,15 @@ Feature: Release Forms Admin
 
     Background:
         Given I successfully enter the homepage as an admin
-        And I managed to enter the gerenciamento_page
-        And I successfully created some forms
+        And I managed to go to home_gerenciamento_enviar_templates_path
+        And I already created some templates
 
     Scenario: Release forms
-       When I click the "Enviar Formulários" button
-       Then I should be redirected to forms_page
-       Then I want to be able to see the already created templates with no class associated
-       Then I want to be able to select a specific class to send this form
-       Then The the class will be associated with this form
-
-    Scenario: Release forms page not loading
-        When I click the "Enviar Formulários" button
-        Then Nothing happens
-
-    Scenario: Release forms page not working properly
-        When I click the "Enviar Formulários" button
-       Then I should be redirected to forms_page
-       Then I want to be able to see the already created templates with no class associated
-       Then I want to be able to select a specific class to send this form
-       Then The association is not made
+        Then I want to be able to see the already created templates
+        When I press "Criar Questionário"
+        Then I should be in the new_questionario_path
+        When I fill in the Nome field with "Avaliação de matéria"
+        Then I should see the turma in the dropdown
+        And I select the turma "1234-Test Subject"
+        And I press "Criar"
+        Then I should see "Questionário criado com sucesso"

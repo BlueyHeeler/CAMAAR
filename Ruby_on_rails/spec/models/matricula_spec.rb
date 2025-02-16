@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Matricula, type: :model do
-
   it "is not valid without a turma" do
     user = User.create(nome: "User Test", email: "user@test.com", password: "password")
     matricula = Matricula.new(estudante: user)

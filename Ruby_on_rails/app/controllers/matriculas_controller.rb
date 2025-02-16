@@ -25,7 +25,7 @@ class MatriculasController < ApplicationController
 
     respond_to do |format|
       if @matricula.save
-        format.html { redirect_to @matricula}
+        format.html { redirect_to @matricula }
         format.json { render :show, status: :created, location: @matricula }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class MatriculasController < ApplicationController
   def update
     respond_to do |format|
       if @matricula.update(matricula_params)
-        format.html { redirect_to @matricula}
+        format.html { redirect_to @matricula }
         format.json { render :show, status: :ok, location: @matricula }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class MatriculasController < ApplicationController
     @matricula.destroy!
 
     respond_to do |format|
-      format.html { redirect_to matriculas_path, status: :see_other}
+      format.html { redirect_to matriculas_path, status: :see_other }
       format.json { head :no_content }
     end
   end

@@ -7,12 +7,13 @@ Feature: Homepage Admin
         Given I successfully enter the homepage as an admin
 
     Scenario: Homepage as ADMIN
-        When I click the "Gerenciamento" button
-        Then I should be redirected to gerenciamento_page
-        And be able to see and interact with "Importar Dados" button
-        And be able to see and interact with "Editar Template" button
-        And be able to see and interact with "Enviar Forms" button
+        And be able to see and interact with "Importar dados" button
+        And be able to see and interact with "Editar templates" button
+        And be able to see and interact with "Enviar Formulários" button
+        And be able to see and interact with "Users" button
         And be able to see and interact with "Resultados" button
+        And be able to see and interact with "Perfil" button
+        And be able to see and interact with "Logout" button
 
     Scenario: Homepage as ADMIN not working properly
-        When I as an admin can not see the "Gerenciamento" button
+        When I as an admin can not see the "Importar Dados" button

@@ -25,7 +25,7 @@ class MateriaController < ApplicationController
 
     respond_to do |format|
       if @materium.save
-        format.html { redirect_to @materium}
+        format.html { redirect_to @materium }
         format.json { render :show, status: :created, location: @materium }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class MateriaController < ApplicationController
   def update
     respond_to do |format|
       if @materium.update(materium_params)
-        format.html { redirect_to @materium}
+        format.html { redirect_to @materium }
         format.json { render :show, status: :ok, location: @materium }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class MateriaController < ApplicationController
     @materium.destroy!
 
     respond_to do |format|
-      format.html { redirect_to materia_path, status: :see_other}
+      format.html { redirect_to materia_path, status: :see_other }
       format.json { head :no_content }
     end
   end

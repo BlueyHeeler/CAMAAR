@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Questionario, type: :model do
-
   it "is not valid without a turma" do
     template = Template.create(nome: "Template Teste")
     user = User.create(nome: "User Test", email: "user@test.com", password: "password")

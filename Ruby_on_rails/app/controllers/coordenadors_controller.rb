@@ -38,7 +38,7 @@ class CoordenadorsController < ApplicationController
   def update
     respond_to do |format|
       if @coordenador.update(coordenador_params)
-        format.html { redirect_to @coordenador}
+        format.html { redirect_to @coordenador }
         format.json { render :show, status: :ok, location: @coordenador }
       else
         format.html { render :edit, status: :unprocessable_entity }

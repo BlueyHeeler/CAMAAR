@@ -43,7 +43,6 @@ class HomeController < ApplicationController
       department = Departamento.find_or_create_by!(nome: department_name)
 
       imported_data.each do |data|
-
         begin
           materia = Materia.find_or_create_by!(
             codigo: data["code"],

@@ -16,7 +16,7 @@ RSpec.describe RespostaController, type: :controller do
   describe "POST #create" do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: { respostas: [invalid_attributes] }
+        post :create, params: { respostas: [ invalid_attributes ] }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

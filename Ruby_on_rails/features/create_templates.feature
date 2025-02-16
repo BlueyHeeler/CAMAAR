@@ -4,19 +4,23 @@ Feature: Create Template
     So that I can better manage the models
 
     Background:
+        Given I am an admin
         Given I am on the template page
-        When I press "+"
+        When I press "New Template"
         Then I should go to the create template page
 
     Scenario: Create template
         When I fill in the "Nome" field with "Nome do Template"
-        And I fill in the "Texto" field with "Descrição"
-        And I press "Criar"
-        Then I should go to the template page
-        And I should see "Nome do Template"
+        When I fill in the "Publico alvo" field with "student"
+        When I fill in the "Semestre" field with "2024.2"
+        And I press "Create Template"
+        Then I should go to home_gerenciamento_templates_path
 
     Scenario: Create template with missing fields
-        When I press "Criar"
-        Then I should see the error message "Fill in the fields"
+    When I fill in the "Nome" field with "Nome do Template"
+        When I fill in the "Publico alvo" field with "student"
+        When I fill in the "Semestre" field with ""
+        When I press "Create Template"
+        Then I should see the error message "Semestre can't be blank"
         And I should remain on the create template page
 

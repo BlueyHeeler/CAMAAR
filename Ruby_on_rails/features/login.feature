@@ -19,4 +19,4 @@ Feature: Login
         And I fill in the "matricula" field with "141128"
         And I fill in the "Password" field with "wrongpassword"
         And I select the user role "student"
-        And I press the login button "Let`s go"
+        And I press the button "Let`s go"

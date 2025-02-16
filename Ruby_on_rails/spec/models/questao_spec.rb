@@ -22,5 +22,4 @@ RSpec.describe Questao, type: :model do
     assoc = Questao.reflect_on_association(:respostas)
     expect(assoc.macro).to eq :has_many
   end
-  
 end

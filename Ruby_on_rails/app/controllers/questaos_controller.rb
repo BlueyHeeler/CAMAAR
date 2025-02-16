@@ -82,7 +82,7 @@ class QuestaosController < ApplicationController
     @questao.destroy!
 
     respond_to do |format|
-      format.html { redirect_to template_path(@template), status: :see_other}
+      format.html { redirect_to template_path(@template), status: :see_other }
       format.json { head :no_content }
     end
   end
