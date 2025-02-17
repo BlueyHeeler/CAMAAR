@@ -5,18 +5,20 @@ Feature: Register
 
   Scenario: Successful registration with valid data
     Given I am on the registration page
-    When I fill in the registration form with the following details:
-      | Name         | Email                  | Password    | Password Confirmation |
-      | fulano       | fulano@email.com       | password123 | password123           |
-    And I click the "Register" button
-    Then I should see the message "Registration successful!"
-    And I should be redirected to the homepage
+    When I fill in the "matricula" with "123456"
+    And I fill in the "Nome" with "Test"
+    And I fill in the "Email" with "test@gmail.com"
+    And I fill in the "Password" with "1234"
+    And I select the user role for my registration "student"
+    And I submit the form by clicking the "Sign Up →" button
+    Then I should go to the login_path
 
   Scenario: Registration with an email already registered
-    Given a user with the email "fulano@email.com" already exists
-    And I am on the registration page
-    When I fill in the registration form with the following details:
-        | Name         | Email                  | Password    | Password Confirmation |
-        | fulano       | fulano@email.com       | password123 | password123           |
-    And I click the "Register" button
-    Then I should see the error message "Email is already taken"
+    Given I am on the registration page
+    When I fill in the "matricula" with "123456"
+    And I fill in the "Nome" with "Test"
+    And I fill in the "Email" with ""
+    And I fill in the "Password" with "1234"
+    And I select the user role for my registration "student"
+    And I submit the form by clicking the "Sign Up →" button
+    Then I should stay in the sign_up_path

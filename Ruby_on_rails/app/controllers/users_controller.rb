@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         format.html { redirect_to login_path }
         format.json { render :show, status: :created, location: @user }
       else
-        flash[:alert] = "Registration with an email already registered"
+        flash[:alert] = "Registration error"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

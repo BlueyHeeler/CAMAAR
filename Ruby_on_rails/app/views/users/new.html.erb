@@ -51,10 +51,9 @@
           </div>
         </div>
 
-        <!-- Botões de submit e back -->
         <div class="button-double">
-          <a href="#" class="button-confirm" onclick="event.preventDefault(); this.closest('form').submit();">Sign Up →</a>
-          <a href="#" class="button-confirm" onclick="window.history.back();">Back ←</a>
+          <%= form.submit "Sign Up →", class: "button-confirm" %>
+          <%= link_to "Back ←", :back, class: "button-confirm" %>
         </div>
       <% end %>
     </div>

@@ -17,7 +17,7 @@ Feature: Create Template
         Then I should go to home_gerenciamento_templates_path
 
     Scenario: Create template with missing fields
-    When I fill in the "Nome" field with "Nome do Template"
+        When I fill in the "Nome" field with "Nome do Template"
         When I fill in the "Publico alvo" field with "student"
         When I fill in the "Semestre" field with ""
         When I press "Create Template"

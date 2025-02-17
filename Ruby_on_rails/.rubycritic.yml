@@ -1,0 +1,12 @@
+---
+paths:
+  - 'app/controllers'
+  - 'app/models'
+exclude_paths:
+  - 'spec/'
+  - 'test/'
+  - 'vendor/'
+  - 'config/'
+minimum_score: 90
+abc_max: 20
+no_browser: true

@@ -6,6 +6,9 @@ class User < ApplicationRecord
     has_one_attached :avatar, dependent: :destroy
     has_secure_password
 
+    validates :matricula, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true
+    validates :nome, presence: true
     validates :password, presence: true, on: :create
     validates :role, inclusion: { in: [ "admin", "professor", "student" ] }
 
