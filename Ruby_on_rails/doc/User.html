@@ -135,9 +135,29 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Role management methods.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#professor%3F-instance_method" title="#professor? (instance method)">#<strong>professor?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -214,8 +234,6 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Role management methods</p>
-
 
   </div>
 </div>
@@ -241,15 +259,67 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_admin?'>admin?</span>
-    <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="professor?-instance_method">
+  
+    #<strong>professor?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_professor?'>professor?</span>
+    <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>professor</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -293,15 +363,15 @@
       <pre class="lines">
 
 
-17
-18
-19</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_student?'>student?</span>
-    <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>student</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>student</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -323,23 +393,23 @@
       <pre class="lines">
 
 
-21
-22
-23
-24
-25
-26
-27
-28</pre>
+29
+30
+31
+32
+33
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_role'>update_role</span><span class='lparen'>(</span><span class='id identifier rubyid_new_role'>new_role</span><span class='rparen'>)</span>
-    <span class='kw'>if</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>student</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_new_role'>new_role</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>professor</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>student</span><span class='tstring_end'>&quot;</span></span> <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_new_role'>new_role</span><span class='rparen'>)</span>
         <span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='label'>role:</span> <span class='id identifier rubyid_new_role'>new_role</span><span class='rparen'>)</span>
     <span class='kw'>else</span>
-        <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:role</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>must be either &#39;admin&#39; or &#39;student&#39;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:role</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>must be admin, professor, or student</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
         <span class='kw'>false</span>
     <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -353,7 +423,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb  5 20:04:02 2025 by
+  Generated on Mon Feb 17 01:11:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.2).
 </div>

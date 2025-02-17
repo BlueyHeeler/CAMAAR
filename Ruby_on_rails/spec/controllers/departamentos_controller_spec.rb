@@ -26,7 +26,7 @@ RSpec.describe DepartamentosController, type: :controller do
 
       it "redirects to the created departamento" do
         post :create, params: { departamento: valid_attributes }
-        expect(response).to redirect_to(Departamento.last)
+        expect(response).to redirect_to(departamentos_path)
       end
     end
   end

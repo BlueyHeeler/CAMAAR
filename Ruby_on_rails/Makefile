@@ -16,6 +16,10 @@ rubocop_autocorrect:
 	@echo "Corrigindo código automaticamente com RuboCop..."
 	bundle exec rubocop --autocorrect
 
+rubocop-cyclomatic:
+	@echo "Verificando complexidade ciclomática com RuboCop..."
+	bundle exec rubocop --only CyclomaticComplexity
+
 rubycritic:
 	@echo "Analisando ABC Score com RubyCritic..."
 	bundle exec rubycritic app/controllers app/models --format html --minimum-score 90 --no-browser
@@ -26,5 +30,5 @@ simpleCov:
 	@echo "Relatório gerado em coverage/index.html"
 
 yard: 
-	@echo "Gerando documentação com YARD..."
-	yard doc
+	@echo "Gerando documentação com YARD para controllers..."
+	yard doc app/controllers/

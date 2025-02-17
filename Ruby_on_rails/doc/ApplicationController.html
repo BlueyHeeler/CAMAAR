@@ -101,9 +101,20 @@
   
 </div>
 
-<div id="subclasses">
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Controlador base da aplicação que fornece funcionalidades compartilhadas entre todos os controllers da aplicação</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="CoordenadorsController.html" title="CoordenadorsController (class)">CoordenadorsController</a></span>, <span class='object_link'><a href="DepartamentosController.html" title="DepartamentosController (class)">DepartamentosController</a></span>, <span class='object_link'><a href="HomeController.html" title="HomeController (class)">HomeController</a></span>, <span class='object_link'><a href="MateriaController.html" title="MateriaController (class)">MateriaController</a></span>, <span class='object_link'><a href="MatriculasController.html" title="MatriculasController (class)">MatriculasController</a></span>, <span class='object_link'><a href="QuestaoOptionsController.html" title="QuestaoOptionsController (class)">QuestaoOptionsController</a></span>, <span class='object_link'><a href="QuestaosController.html" title="QuestaosController (class)">QuestaosController</a></span>, <span class='object_link'><a href="QuestionariosController.html" title="QuestionariosController (class)">QuestionariosController</a></span>, <span class='object_link'><a href="RespondidosController.html" title="RespondidosController (class)">RespondidosController</a></span>, <span class='object_link'><a href="RespostaController.html" title="RespostaController (class)">RespostaController</a></span>, <span class='object_link'><a href="TemplatesController.html" title="TemplatesController (class)">TemplatesController</a></span>, <span class='object_link'><a href="TurmasController.html" title="TurmasController (class)">TurmasController</a></span>, <span class='object_link'><a href="UsersController.html" title="UsersController (class)">UsersController</a></span></p>
+  <p class="children"><span class='object_link'><a href="CoordenadorsController.html" title="CoordenadorsController (class)">CoordenadorsController</a></span>, <span class='object_link'><a href="DepartamentosController.html" title="DepartamentosController (class)">DepartamentosController</a></span>, <span class='object_link'><a href="HomeController.html" title="HomeController (class)">HomeController</a></span>, <span class='object_link'><a href="MateriaController.html" title="MateriaController (class)">MateriaController</a></span>, <span class='object_link'><a href="MatriculasController.html" title="MatriculasController (class)">MatriculasController</a></span>, <span class='object_link'><a href="QuestaosController.html" title="QuestaosController (class)">QuestaosController</a></span>, <span class='object_link'><a href="QuestionariosController.html" title="QuestionariosController (class)">QuestionariosController</a></span>, <span class='object_link'><a href="RespostaController.html" title="RespostaController (class)">RespostaController</a></span>, <span class='object_link'><a href="TemplatesController.html" title="TemplatesController (class)">TemplatesController</a></span>, <span class='object_link'><a href="TurmasController.html" title="TurmasController (class)">TurmasController</a></span>, <span class='object_link'><a href="UsersController.html" title="UsersController (class)">UsersController</a></span></p>
 </div>
 
 
@@ -137,7 +148,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Obtém o usuário atualmente autenticado no sistema.</p>
+</div></span>
   
 </li>
 
@@ -161,21 +174,55 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Obtém o usuário atualmente autenticado no sistema</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><dl class="rdoc-list label-list"><dt>User</dt>
+<dd>
+<p>Retorna uma instância do modelo User se houver usuário logado</p>
+</dd><dt>nil</dt>
+<dd>
+<p>Retorna nil se não houver usuário logado</p>
+</dd></dl>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-5
-6
-7</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/application_controller.rb', line 5</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/application_controller.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_user'>current_user</span>
-  <span class='ivar'>@current_user</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="User.html" title="User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:user_id</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:user_id</span><span class='rbracket'>]</span>
+  <span class='ivar'>@current_user</span> <span class='op'>||=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:user_id</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:user_id</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -187,7 +234,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb  5 20:04:03 2025 by
+  Generated on Mon Feb 17 01:19:47 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.2).
 </div>
