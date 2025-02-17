@@ -32,3 +32,7 @@ simpleCov:
 yard: 
 	@echo "Gerando documentação com YARD para controllers..."
 	yard doc app/controllers/
+
+rdoc: 
+	@echo "Gerando documentação com RDoc..."
+	bundle exec rdoc app/controllers/ app/models/

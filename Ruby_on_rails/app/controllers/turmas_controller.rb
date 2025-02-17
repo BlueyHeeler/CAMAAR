@@ -1,26 +1,89 @@
+# Controller responsável pelo gerenciamento de turmas no sistema
 class TurmasController < ApplicationController
   include CrudActions
   before_action :set_turma, only: %i[ show edit update destroy ]
 
-  # GET /turmas or /turmas.json
+  # Lista todas as turmas cadastradas
+  #
+  # @description
+  #   Recupera todas as turmas do banco de dados
+  #
+  # @arguments
+  #   Não recebe argumentos
+  #
+  # @return
+  #   Define @turmas com lista de todas as turmas
+  #
+  # @side_effects
+  #   Realiza consulta ao banco de dados
   def index
     @turmas = Turma.all
   end
 
-  # GET /turmas/1 or /turmas/1.json
+  # Exibe detalhes de uma turma específica
+  #
+  # @description
+  #   Mostra informações detalhadas de uma turma
+  #
+  # @arguments
+  #   Utiliza params[:id] definido na rota
+  #
+  # @return
+  #   Não possui retorno direto
+  #
+  # @side_effects
+  #   Utiliza @turma definido pelo before_action
   def show
   end
 
-  # GET /turmas/new
+  # Formulário para criar nova turma
+  #
+  # @description
+  #   Inicializa um novo objeto Turma para o formulário
+  #
+  # @arguments
+  #   Não recebe argumentos
+  #
+  # @return
+  #   Define @turma como nova instância de Turma
+  #
+  # @side_effects
+  #   Não realiza alterações no banco
   def new
     @turma = Turma.new
   end
 
-  # GET /turmas/1/edit
+  # Formulário para editar turma existente
+  #
+  # @description
+  #   Prepara formulário para edição de turma
+  #
+  # @arguments
+  #   Utiliza params[:id] definido na rota
+  #
+  # @return
+  #   Não possui retorno direto
+  #
+  # @side_effects
+  #   Utiliza @turma definido pelo before_action
   def edit
   end
 
-  # POST /turmas or /turmas.json
+  # Cria uma nova turma
+  #
+  # @description
+  #   Processa o formulário de criação de turma
+  #
+  # @arguments
+  #   Utiliza turma_params com dados do formulário
+  #
+  # @return
+  #   Redireciona para show em caso de sucesso
+  #   Renderiza new com erros em caso de falha
+  #
+  # @side_effects
+  #   Cria registro no banco de dados
+  #   Redireciona para outra página
   def create
     @turma = Turma.new(turma_params)
 
@@ -36,12 +99,11 @@ class TurmasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_turma
       @turma = Turma.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def turma_params
       params.expect(turma: [ :codigo, :semestre, :materium_id, :horario ])
     end

@@ -1,29 +1,90 @@
+# Controller responsável pelo gerenciamento de respostas no sistema
 class RespostaController < ApplicationController
   include CrudActions
 
   before_action :set_respostum, only: %i[ show edit update destroy ]
 
-  # GET /resposta or /resposta.json
+  # Lista todas as respostas cadastradas
+  #
+  # @description
+  #   Recupera todas as respostas do banco de dados
+  #
+  # @arguments
+  #   Não recebe argumentos
+  #
+  # @return
+  #   Define @resposta com lista de todas as respostas
+  #
+  # @side_effects
+  #   Realiza consulta ao banco de dados
   def index
     @resposta = Respostum.all
   end
 
-  # GET /resposta/1 or /resposta/1.json
+  # Exibe detalhes de uma resposta específica
+  #
+  # @description
+  #   Mostra informações detalhadas de uma resposta
+  #
+  # @arguments
+  #   Utiliza params[:id] definido na rota
+  #
+  # @return
+  #   Não possui retorno direto
+  #
+  # @side_effects
+  #   Utiliza @respostum definido pelo before_action
   def show
   end
 
-  # GET /resposta/new
+  # Formulário para criar nova resposta
+  #
+  # @description
+  #   Inicializa um novo objeto Respostum para o formulário
+  #
+  # @arguments
+  #   Não recebe argumentos
+  #
+  # @return
+  #   Define @respostum como nova instância de Respostum
+  #
+  # @side_effects
+  #   Não realiza alterações no banco
   def new
     @respostum = Respostum.new
     @questionario = Questionario.find(params[:questionario_id])
     @questoes = @questionario.template.questaos
   end
 
-  # GET /resposta/1/edit
+  # Formulário para editar resposta existente
+  #
+  # @description
+  #   Prepara formulário para edição de resposta
+  #
+  # @arguments
+  #   Utiliza params[:id] definido na rota
+  #
+  # @return
+  #   Não possui retorno direto
+  #
+  # @side_effects
+  #   Utiliza @respostum definido pelo before_action
   def edit
   end
 
-  # POST /resposta or /resposta.json
+  # Cria uma nova resposta
+  #
+  # @description
+  #   Cria uma nova resposta no banco de dados
+  #
+  # @arguments
+  #   Utiliza params[:respostas] definido no formulário
+  #
+  # @return
+  #   Redireciona para a página inicial
+  #
+  # @side_effects
+  #   Cria uma nova resposta no banco de dados
   def create
     success = true
 

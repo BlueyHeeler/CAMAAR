@@ -74,7 +74,7 @@ Given('I successfully enter the homepage as an admin') do
   end
 
   When('I press {string}') do |button|
-    click_on button
+      click_on button
   end
 
   Then('I should go to the create template page') do
@@ -271,8 +271,8 @@ Given('I successfully enter the homepage as an admin') do
     find("select#questionario_turma_id").find("option[value='#{turma.id}']").select_option
   end
 
-  Then ('I should go to questionario_path') do
-    expect(current_path).to eq(questionario_path(Questionario.last))
+  Then ('I should go to home_gerenciamento_enviar_templates_path') do
+    expect(current_path).to eq(home_gerenciamento_enviar_templates_path)
   end
 
   Given('I am on the registration page') do

@@ -16,4 +16,4 @@ Feature: Release Forms Admin
         When I fill in the Nome field with "Avaliação de matéria"
         And I select the turma "1234-Test Subject"
         And I press "Criar"
-        Then I should go to questionario_path
+        Then I should go to home_gerenciamento_enviar_templates_path

@@ -62,7 +62,9 @@ module MemberImportService
       return unless turma
   
       import_students(data["dicente"], turma) if data["dicente"]
-      import_professor(data["docente"], turma) if data["docente"]
+      # Fix: Check for both "docente" and "professor" keys
+      professor_data = data["docente"] || data["professor"]
+      import_professor(professor_data, turma) if professor_data
     end
   
     # Localiza uma turma específica
@@ -90,12 +92,16 @@ module MemberImportService
   
     def import_professor(professor_data, turma)
       return unless valid_user_data?(professor_data)
+      # Ensure professor data is treated as a single object, not an array
       user = create_or_update_user(professor_data, "professor")
       create_matricula(user, turma)
     end
   
     def valid_user_data?(data)
-      data["matricula"].present? && data["email"].present? && data["nome"].present?
+      return false unless data
+      (data["matricula"].present? || data["usuario"].present?) && 
+      data["email"].present? && 
+      data["nome"].present?
     end
   
     def create_or_update_user(data, role)

@@ -1,6 +1,7 @@
+# Controller responsável pelo gerenciamento de questões no sistema
 class QuestaosController < ApplicationController
   include CrudActions
-  
+
   before_action :set_template
   before_action :set_questao, only: %i[ show edit update destroy ]
 
@@ -22,7 +23,24 @@ class QuestaosController < ApplicationController
   def edit
   end
 
-  # POST /questaos or /questaos.json
+  # Cria nova(s) questão(ões) para um template
+  #
+  # @description
+  #   Processa o formulário de criação de questões, permitindo múltiplas questões
+  #   Realiza validação e salvamento em transação
+  #
+  # @arguments
+  #   params[:questaos] - Hash com dados das questões
+  #   params[:template_id] - ID do template associado
+  #
+  # @return
+  #   Redireciona para o template em caso de sucesso
+  #   Redireciona para novo formulário em caso de erro
+  #
+  # @side_effects
+  #   Cria registros no banco de dados
+  #   Define flash messages
+  #   Redireciona para outra página
   def create
     success = true
     created_questions = []
@@ -62,15 +80,30 @@ class QuestaosController < ApplicationController
     end
   end
 
-  # PATCH/PUT /questaos/1 or /questaos/1.json
+  # Atualiza uma questão existente
+  #
+  # @description
+  #   Processa o formulário de edição de questão
+  #   Atualiza os atributos da questão
+  #
+  # @arguments
+  #   params[:id] - ID da questão
+  #   params[:questaos] ou params[:questao] - Dados da questão
+  #
+  # @return
+  #   Redireciona para o template em caso de sucesso
+  #   Renderiza formulário de edição em caso de erro
+  #
+  # @side_effects
+  #   Atualiza registro no banco de dados
+  #   Define flash messages
+  #   Redireciona para outra página
   def update
     questao_data = params[:questaos]&.values&.first || params[:questao]
-
+    
     respond_to do |format|
-      if @questao.update(enunciado: questao_data[:enunciado], texto: questao_data[:texto])
-        format.html {
-          redirect_to template_path(@template)
-        }
+      if @questao.update(questao_params(questao_data))
+        format.html { redirect_to @template }
         format.json { render :show, status: :ok, location: @questao }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -80,6 +113,25 @@ class QuestaosController < ApplicationController
   end
 
   private
+
+    def questao_params(questao_data)
+      return {} unless questao_data
+      
+      if questao_data.respond_to?(:permit)
+        questao_data.permit(:enunciado, :texto)
+      else
+        questao_data.slice(:enunciado, :texto)
+      end
+    end
+
+    def set_template
+      @template = Template.find(params[:template_id])
+    end
+
+    def set_questao
+      @questao = @template.questaos.find(params[:id])
+    end
+
     def resource_class
       Questao
     end

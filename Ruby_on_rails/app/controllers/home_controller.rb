@@ -72,6 +72,22 @@ class HomeController < ApplicationController
     end
   end
 
+  # Importa dados de membros (estudantes e professores)
+  #
+  # @description
+  #   Processa dados JSON de membros e realiza importação
+  #
+  # @arguments
+  #   params[:imported_data] - JSON com dados dos membros
+  #   params[:department_name] - Nome do departamento
+  #
+  # @return
+  #   Redireciona para homepage com mensagem de sucesso ou erro
+  #
+  # @side_effects
+  #   Cria/atualiza registros no banco de dados
+  #   Define flash messages
+  #   Redireciona para outra página
   def import_data_members
     begin
       imported_data = JSON.parse(params[:imported_data])
@@ -82,6 +98,19 @@ class HomeController < ApplicationController
     end
   end
 
+  # Lista templates para envio
+  #
+  # @description
+  #   Recupera todos os templates disponíveis para envio
+  #
+  # @arguments
+  #   Não recebe argumentos
+  #
+  # @return
+  #   Define @templates com lista de todos os templates
+  #
+  # @side_effects
+  #   Realiza consulta ao banco de dados
   def gerenciamento_enviar_templates
     @templates = Template.all
   end

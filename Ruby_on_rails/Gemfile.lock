@@ -529,6 +529,7 @@ DEPENDENCIES
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.1)
+  rdoc
   reek
   rspec-rails (~> 6.1.0)
   rubocop
