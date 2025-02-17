@@ -1,4 +1,6 @@
 class TemplatesController < ApplicationController
+  include CrudActions
+
   before_action :set_template, only: %i[ show edit update destroy ]
 
   # GET /templates or /templates.json
@@ -19,52 +21,28 @@ class TemplatesController < ApplicationController
   def edit
   end
 
-  # POST /templates or /templates.json
-  def create
-    @template = Template.new(template_params)
-
-    respond_to do |format|
-      if @template.save
-        format.html { redirect_to home_gerenciamento_templates_path }
-        format.json { render :show, status: :created, location: @template }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /templates/1 or /templates/1.json
-  def update
-    respond_to do |format|
-      if @template.update(template_params)
-        format.html { redirect_to home_gerenciamento_templates_path }
-        format.json { render :show, status: :ok, location: @template }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /templates/1 or /templates/1.json
-  def destroy
-    @template.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to home_gerenciamento_templates_path, status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_template
-      @template = Template.find(params.expect(:id))
+    def resource_class
+      Template
     end
 
-    # Only allow a list of trusted parameters through.
-    def template_params
+    def resource_params
       params.require(:template).permit(:nome, :publico_alvo, :semestre)
+    end
+
+    def set_template
+      @template = Template.find(params[:id])
+    end
+
+    def after_destroy_path
+      home_gerenciamento_templates_path
+    end
+
+    def after_create_path
+      home_gerenciamento_templates_path
+    end
+
+    def after_update_path
+      home_gerenciamento_templates_path
     end
 end

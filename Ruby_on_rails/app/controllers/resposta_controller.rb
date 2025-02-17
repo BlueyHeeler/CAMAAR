@@ -1,4 +1,6 @@
 class RespostaController < ApplicationController
+  include CrudActions
+
   before_action :set_respostum, only: %i[ show edit update destroy ]
 
   # GET /resposta or /resposta.json
@@ -40,37 +42,28 @@ class RespostaController < ApplicationController
     end
   end
 
-  # PATCH/PUT /resposta/1 or /resposta/1.json
-  def update
-    respond_to do |format|
-      if @respostum.update(respostum_params)
-        format.html { redirect_to @respostum }
-        format.json { render :show, status: :ok, location: @respostum }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @respostum.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /resposta/1 or /resposta/1.json
-  def destroy
-    @respostum.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to resposta_path, status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_respostum
-      @respostum = Respostum.find(params.expect(:id))
+    def resource_class
+      Respostum
     end
 
-    # Only allow a list of trusted parameters through.
-    def respostum_params
-      params.expect(respostum: [ :valor, :questao_id, :questionario_id, :user_id ])
+    def resource_params
+      params.require(:respostum).permit(:valor, :questao_id, :questionario_id, :user_id)
+    end
+
+    def set_respostum
+      @respostum = Respostum.find(params[:id])
+    end
+
+    def after_destroy_path
+      resposta_path
+    end
+
+    def after_create_path
+      resposta_path
+    end
+
+    def after_update_path
+      resposta_path
     end
 end

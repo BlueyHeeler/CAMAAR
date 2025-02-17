@@ -1,4 +1,5 @@
 class TurmasController < ApplicationController
+  include CrudActions
   before_action :set_turma, only: %i[ show edit update destroy ]
 
   # GET /turmas or /turmas.json
@@ -34,29 +35,6 @@ class TurmasController < ApplicationController
     end
   end
 
-  # PATCH/PUT /turmas/1 or /turmas/1.json
-  def update
-    respond_to do |format|
-      if @turma.update(turma_params)
-        format.html { redirect_to @turma }
-        format.json { render :show, status: :ok, location: @turma }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @turma.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /turmas/1 or /turmas/1.json
-  def destroy
-    @turma.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to turmas_path, status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_turma
@@ -65,6 +43,26 @@ class TurmasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def turma_params
-      params.expect(turma: [ :codigo, :semestre, :materium_id ])
+      params.expect(turma: [ :codigo, :semestre, :materium_id, :horario ])
+    end
+    
+    def resource_class
+      Turma
+    end
+
+    def resource_params
+      params.require(:turma).permit(:codigo, :semestre, :materium_id, :horario)
+    end
+
+    def set_turma
+      @turma = Turma.find(params[:id])
+    end
+
+    def after_destroy_path
+      turmas_path
+    end
+
+    def after_update_path
+      turmas_path
     end
 end

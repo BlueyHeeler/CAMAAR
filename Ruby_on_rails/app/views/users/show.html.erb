@@ -33,4 +33,7 @@
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back", home_homepage_path %>
+  <% if current_user.role == 'admin' %>
+      <%= button_to "Destroy this matricula", @user, method: :delete %>
+  <% end %>
 </div>

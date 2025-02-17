@@ -1,4 +1,6 @@
 class QuestionariosController < ApplicationController
+  include CrudActions
+
   before_action :set_questionario, only: %i[ show edit update destroy ]
 
   # GET /questionarios or /questionarios.json
@@ -15,59 +17,35 @@ class QuestionariosController < ApplicationController
   def new
     @questionario = Questionario.new
     @questionario.template_id = params[:template_id] if params[:template_id]
-    @turmas = Turma.all  # Add this line to fetch all turmas
+    @turmas = Turma.all
   end
 
   # GET /questionarios/1/edit
   def edit
   end
 
-  # POST /questionarios or /questionarios.json
-  def create
-    @questionario = Questionario.new(questionario_params)
-
-    respond_to do |format|
-      if @questionario.save
-        format.html { redirect_to @questionario }
-        format.json { render :show, status: :created, location: @questionario }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @questionario.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /questionarios/1 or /questionarios/1.json
-  def update
-    respond_to do |format|
-      if @questionario.update(questionario_params)
-        format.html { redirect_to @questionario }
-        format.json { render :show, status: :ok, location: @questionario }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @questionario.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /questionarios/1 or /questionarios/1.json
-  def destroy
-    @questionario.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to home_gerenciamento_enviar_templates_path, status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_questionario
-      @questionario = Questionario.find(params.expect(:id))
+    def resource_class
+      Questionario
     end
 
-    # Only allow a list of trusted parameters through.
-    def questionario_params
-      params.expect(questionario: [ :nome, :turma_id, :template_id, :user_id ]).permit(:nome, :turma_id, :template_id, :user_id)
+    def resource_params
+      params.require(:questionario).permit(:nome, :turma_id, :template_id, :user_id)
+    end
+
+    def set_questionario
+      @questionario = Questionario.find(params[:id])
+    end
+
+    def after_destroy_path
+      home_gerenciamento_enviar_templates_path
+    end
+
+    def after_create_path
+      home_gerenciamento_enviar_templates_path
+    end
+
+    def after_update_path
+      home_gerenciamento_enviar_templates_path
     end
 end

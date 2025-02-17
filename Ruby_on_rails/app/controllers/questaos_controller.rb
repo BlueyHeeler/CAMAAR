@@ -1,4 +1,6 @@
 class QuestaosController < ApplicationController
+  include CrudActions
+  
   before_action :set_template
   before_action :set_questao, only: %i[ show edit update destroy ]
 
@@ -77,18 +79,19 @@ class QuestaosController < ApplicationController
     end
   end
 
-  # DELETE /questaos/1 or /questaos/1.json
-  def destroy
-    @questao.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to template_path(@template), status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def resource_class
+      Questao
+    end
+
+    def resource_params
+      if params[:questaos].present?
+        params.require(:questaos).require("0").permit(:enunciado, :texto)
+      else
+        params.require(:questao).permit(:enunciado, :texto)
+      end
+    end
+
     def set_template
       @template = Template.find(params[:template_id])
     end
@@ -97,12 +100,7 @@ class QuestaosController < ApplicationController
       @questao = Questao.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def questao_params
-      if params[:questaos].present?
-        params.require(:questaos).require("0").permit(:enunciado, :texto)
-      else
-        params.require(:questao).permit(:enunciado, :texto)
-      end
+    def after_destroy_path
+      template_path(@template)
     end
 end

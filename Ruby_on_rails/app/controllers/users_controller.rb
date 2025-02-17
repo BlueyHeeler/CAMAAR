@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include CrudActions
+
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -17,22 +19,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-  end
-
-  # POST /users or /users.json
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to login_path }
-        format.json { render :show, status: :created, location: @user }
-      else
-        flash[:alert] = "Registration error"
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /users/1 or /users/1.json
@@ -54,24 +40,28 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
-  def destroy
-    @user.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to users_path, status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def user_params
+      params.require(:user).permit(:matricula, :email, :nome, :role, :password, :password_confirmation, :avatar)
+    end
+
+    def resource_class
+      User
+    end
+
+    def resource_params
+      params.require(:user).permit(:matricula, :email, :nome, :role, :password, :password_confirmation, :avatar)
+    end
+
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:matricula, :email, :nome, :role, :password, :password_confirmation, :avatar)
+    def after_create_path
+      login_path
+    end
+
+    def after_destroy_path
+      users_path
     end
 end

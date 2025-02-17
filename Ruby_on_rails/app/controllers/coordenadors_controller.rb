@@ -1,4 +1,6 @@
 class CoordenadorsController < ApplicationController
+  include CrudActions
+
   before_action :set_coordenador, only: %i[ show edit update destroy ]
 
   # GET /coordenadors or /coordenadors.json
@@ -19,52 +21,28 @@ class CoordenadorsController < ApplicationController
   def edit
   end
 
-  # POST /coordenadors or /coordenadors.json
-  def create
-    @coordenador = Coordenador.new(coordenador_params)
-
-    respond_to do |format|
-      if @coordenador.save
-        format.html { redirect_to @coordenador }
-        format.json { render :show, status: :created, location: @coordenador }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @coordenador.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /coordenadors/1 or /coordenadors/1.json
-  def update
-    respond_to do |format|
-      if @coordenador.update(coordenador_params)
-        format.html { redirect_to @coordenador }
-        format.json { render :show, status: :ok, location: @coordenador }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @coordenador.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /coordenadors/1 or /coordenadors/1.json
-  def destroy
-    @coordenador.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to coordenadors_path, status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_coordenador
-      @coordenador = Coordenador.find(params.expect(:id))
+    def resource_class
+      Coordenador
     end
 
-    # Only allow a list of trusted parameters through.
-    def coordenador_params
-      params.expect(coordenador: [ :departamento_id, :user_id ])
+    def resource_params
+      params.require(:coordenador).permit(:departamento_id, :user_id)
+    end
+
+    def set_coordenador
+      @coordenador = Coordenador.find(params[:id])
+    end
+
+    def after_destroy_path
+      coordenadors_path
+    end
+
+    def after_create_path
+      coordenadors_path
+    end
+
+    def after_update_path
+      coordenadors_path
     end
 end
